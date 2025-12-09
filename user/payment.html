@@ -36,98 +36,39 @@
     </script>
   </head>
   <body class="bg-gray-50">
-    <!-- Header -->
     <header class="bg-white shadow-md sticky top-0 z-50">
-      <div
-        class="container mx-auto px-4 py-4 flex items-center justify-between"
-      >
-        <a
-          href="checkout.html"
-          class="text-sm text-primary hover:underline flex items-center space-x-1"
-        >
+      <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+        <a href="checkout.html" class="text-sm text-primary hover:underline flex items-center space-x-1">
           <i class="fas fa-arrow-left text-lg"></i>
         </a>
-        <p
-          class="absolute left-1/2 -translate-x-1/2 font-bold text-lg text-primary"
-        >
+        <p class="absolute left-1/2 -translate-x-1/2 font-bold text-lg text-primary">
           Pembayaran
         </p>
       </div>
     </header>
 
-    <!-- Content -->
     <main class="container mx-auto px-4 py-8 max-w-4xl">
       <div id="empty-state" class="hidden">
-        <div
-          class="bg-white rounded-lg shadow-md p-6 flex flex-col items-center text-center"
-        >
-          <i class="fas fa-shopping-cart text-4xl text-gray-300 mb-4"></i>
-          <p class="text-gray-600 mb-4">Belum ada pesanan untuk dibayar.</p>
-          <a
-            href="index.html"
-            class="bg-primary text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-opacity-90 transition"
-          >
+        <div class="bg-white rounded-lg shadow-md p-6 flex flex-col items-center text-center">
+          <i class="fas fa-shopping-cart text-4xl text-black mb-4"></i>
+          <p class="text-black mb-4">Belum ada pesanan untuk dibayar.</p>
+          <a href="index.html" class="bg-primary text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-opacity-90 transition">
             Kembali ke Menu
           </a>
         </div>
       </div>
 
       <div id="payment-content" class="space-y-6 hidden">
-        <!-- Ringkasan Pesanan -->
         <div class="bg-white rounded-lg shadow-md p-4 md:p-6">
-          <h3 class="text-lg font-semibold text-gray-800 mb-4">
-            Ringkasan Pesanan
-          </h3>
 
-          <div id="payment-items" class="divide-y divide-gray-200 mb-4"></div>
+          <h3 class="text-lg font-semibold text-black mb-4">Ringkasan Pesanan</h3>
 
-          <div class="pt-4 border-t border-gray-200 space-y-2">
-            <div class="flex items-center justify-between text-sm">
-              <span class="text-gray-600">Subtotal</span>
-              <span id="subtotal" class="text-gray-800"></span>
-            </div>
-
-            <div
-              class="flex items-center justify-between pt-2 border-t border-gray-200"
-            >
-              <span class="text-lg font-semibold text-gray-800">Total</span>
-              <span
-                id="total-amount"
-                class="text-2xl font-bold text-primary"
-              ></span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Informasi Pelanggan & Metode Pembayaran -->
-        <div class="bg-white rounded-lg shadow-md p-4 md:p-6 fade-in">
-          <h3 class="text-lg font-semibold text-gray-800 mb-4">
-            Informasi Pesanan
-          </h3>
+          <!-- GARIS PEMISAH BARU -->
+          <hr class="border-t-2 border-gray-300 mb-4">
 
           <div class="space-y-4 mb-6">
             <div>
-              <label
-                for="meja"
-                class="text-sm font-medium text-gray-700 mb-2"
-              >
-                Meja
-              </label>
-              <input
-                type="text"
-                id="meja"
-                name="meja"
-                placeholder="1"
-                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-              />
-            </div>
-
-            <div class="space-y-4 mb-6">
-            <div>
-              <label
-                for="tipe-pesanan"
-                class="text-sm font-medium text-gray-700 mb-2"
-              >
+              <label for="tipe-pesanan" class="text-sm font-medium text-black mb-2">
                 Tipe Pesanan
               </label>
               <select
@@ -140,13 +81,8 @@
               </select>
             </div>
 
-            
-
             <div>
-              <label
-                for="customer-name"
-                class="block text-sm font-medium text-gray-700 mb-2"
-              >
+              <label for="customer-name" class="block text-sm font-medium text-black mb-2">
                 Nama
               </label>
               <input
@@ -159,10 +95,7 @@
             </div>
 
             <div>
-              <label
-                for="customer-phone"
-                class="block text-sm font-medium text-gray-700 mb-2"
-              >
+              <label for="customer-phone" class="block text-sm font-medium text-black mb-2">
                 Nomor Telepon
               </label>
               <input
@@ -175,74 +108,48 @@
             </div>
           </div>
 
-          <div class="pt-4 border-t border-gray-200">
-            <h3 class="text-lg font-semibold text-gray-800 mb-4">
-              Pilih Metode Pembayaran
-            </h3>
+          <!-- GARIS PEMISAH BAGIAN BAWAH (ganti border-t lama) -->
+          <hr class="border-t border-gray-300 mb-4">
 
-            <div class="space-y-3">
-              <!-- E-Wallet -->
-              <div
-                class="payment-method border-2 border-gray-200 rounded-lg p-4 cursor-pointer"
-                onclick="selectPaymentMethod('ewallet')"
-              >
-                <div class="flex items-center justify-between">
-                  <div class="flex items-center space-x-3">
-                    <i class="fa-solid fa-qrcode text-2xl text-primary"></i>
-                    <div>
-                      <p class="font-semibold text-gray-800">QRIS</p>
-                    </div>
-                  </div>
-                  <i
-                    id="icon-ewallet"
-                    class="fas fa-circle text-gray-300 text-lg hidden"
-                  ></i>
-                  <i
-                    id="icon-ewallet-check"
-                    class="fas fa-check-circle text-primary text-lg hidden"
-                  ></i>
+          <h3 class="text-lg font-semibold text-black mb-4">Pilih Metode Pembayaran</h3>
+
+          <div class="space-y-3">
+            <div class="payment-method border-2 border-gray-200 rounded-lg p-4 cursor-pointer"
+              onclick="selectPaymentMethod('ewallet')">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                  <i class="fa-solid fa-qrcode text-2xl text-primary"></i>
+                  <div><p class="font-semibold text-black">QRIS</p></div>
                 </div>
+                <i id="icon-ewallet" class="fas fa-circle text-black text-lg hidden"></i>
+                <i id="icon-ewallet-check" class="fas fa-check-circle text-primary text-lg hidden"></i>
               </div>
+            </div>
 
-              <!-- Cash on Delivery -->
-              <div
-                class="payment-method border-2 border-gray-200 rounded-lg p-4 cursor-pointer"
-                onclick="selectPaymentMethod('cod')"
-              >
-                <div class="flex items-center justify-between">
-                  <div class="flex items-center space-x-3">
-                    <i class="fas fa-money-bill-wave text-2xl text-primary"></i>
-                    <div>
-                      <p class="font-semibold text-gray-800">Cash</p>
-                    </div>
-                  </div>
-                  <i
-                    id="icon-cod"
-                    class="fas fa-circle text-gray-300 text-lg hidden"
-                  ></i>
-                  <i
-                    id="icon-cod-check"
-                    class="fas fa-check-circle text-primary text-lg hidden"
-                  ></i>
+            <div class="payment-method border-2 border-gray-200 rounded-lg p-4 cursor-pointer"
+              onclick="selectPaymentMethod('cod')">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                  <i class="fas fa-money-bill-wave text-2xl text-primary"></i>
+                  <div><p class="font-semibold text-black">Cash</p></div>
                 </div>
+                <i id="icon-cod" class="fas fa-circle text-black text-lg hidden"></i>
+                <i id="icon-cod-check" class="fas fa-check-circle text-primary text-lg hidden"></i>
               </div>
             </div>
           </div>
+
         </div>
 
-        <!-- Tombol Konfirmasi -->
         <div class="flex flex-col md:flex-row gap-3">
-          <a
-            href="checkout.html"
-            class="w-full md:w-auto text-center border border-primary text-primary px-6 py-3 rounded-lg text-sm font-semibold hover:bg-gray-50 transition"
-          >
+          <a href="checkout.html" class="w-full md:w-auto text-center border border-primary text-primary px-6 py-3 rounded-lg text-sm font-semibold hover:bg-gray-50 transition">
             Kembali
           </a>
           <button
             id="confirm-payment-btn"
             onclick="confirmPayment()"
             disabled
-            class="w-full md:flex-1 bg-gray-300 text-gray-500 px-6 py-3 rounded-lg text-sm font-semibold transition cursor-not-allowed"
+            class="w-full md:flex-1 bg-gray-300 text-black px-6 py-3 rounded-lg text-sm font-semibold transition cursor-not-allowed"
           >
             <i class="fas fa-lock mr-2"></i>
             Konfirmasi Pembayaran
@@ -286,87 +193,29 @@
         paymentContent.classList.remove("hidden");
 
         orderData = cart;
-
-        const paymentItemsEl = document.getElementById("payment-items");
-        const subtotalEl = document.getElementById("subtotal");
-        const totalAmountEl = document.getElementById("total-amount");
-
-        const subtotal = cart.reduce(
-          (sum, item) => sum + item.price * (item.quantity || 0),
-          0
-        );
-        const total = subtotal;
-
-        subtotalEl.textContent = formatRupiah(subtotal);
-        totalAmountEl.textContent = formatRupiah(total);
-
-        paymentItemsEl.innerHTML = cart
-          .map(
-            (item) => `
-          <div class="py-3 flex items-start justify-between space-x-4">
-            <div class="flex items-start space-x-3 flex-1">
-              <img
-                src="${
-                  item.image || "https://via.placeholder.com/80?text=No+Image"
-                }"
-                alt="${item.name}"
-                class="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-lg flex-shrink-0"
-                onerror="this.src='https://via.placeholder.com/80?text=No+Image'"
-              />
-              <div class="flex-1 min-w-0">
-                <p class="font-semibold text-gray-800">${item.name}</p>
-                <p class="text-xs text-gray-500 mt-1">
-                  ${item.quantity} x ${formatRupiah(item.price)}
-                </p>
-              </div>
-            </div>
-            <div class="text-right flex-shrink-0">
-              <p class="font-semibold text-primary">
-                ${formatRupiah(item.price * (item.quantity || 0))}
-              </p>
-            </div>
-          </div>
-        `
-          )
-          .join("");
       }
 
       function selectPaymentMethod(method) {
         selectedPaymentMethod = method;
 
-        // Reset all payment methods
         document.querySelectorAll(".payment-method").forEach((el) => {
           el.classList.remove("active");
         });
 
-        // Hide all icons
         document.querySelectorAll("[id^='icon-']").forEach((el) => {
           el.classList.add("hidden");
         });
 
-        // Show selected state
         const selectedEl = event.currentTarget;
         selectedEl.classList.add("active");
 
         const checkIcon = document.getElementById(`icon-${method}-check`);
-        if (checkIcon) {
-          checkIcon.classList.remove("hidden");
-        }
+        if (checkIcon) checkIcon.classList.remove("hidden");
 
-        // Enable confirm button
         const confirmBtn = document.getElementById("confirm-payment-btn");
         confirmBtn.disabled = false;
-        confirmBtn.classList.remove(
-          "bg-gray-300",
-          "text-gray-500",
-          "cursor-not-allowed"
-        );
-        confirmBtn.classList.add(
-          "bg-primary",
-          "text-white",
-          "hover:bg-opacity-90",
-          "cursor-pointer"
-        );
+        confirmBtn.classList.remove("bg-gray-300", "text-black", "cursor-not-allowed");
+        confirmBtn.classList.add("bg-primary", "text-white", "hover:bg-opacity-90", "cursor-pointer");
       }
 
       function confirmPayment() {
@@ -380,55 +229,8 @@
           return;
         }
 
-        const total = subtotal;
-
-        const methodNames = {
-          ewallet: "E-Wallet",
-          cod: "Cash on Delivery",
-        };
-
-        const confirmMessage = `Terima kasih! Pembayaran Anda telah dikonfirmasi.
-
-Metode Pembayaran: ${methodNames[selectedPaymentMethod]}
-Total Pembayaran: ${formatRupiah(total)}
-
-Pesanan Anda sedang diproses. Anda akan menerima notifikasi ketika pesanan sudah dikirim.`;
-
-        if (confirm(confirmMessage)) {
-          // Simpan data pesanan (opsional, bisa disimpan ke localStorage atau dikirim ke server)
-          const orderHistory = {
-            id: Date.now(),
-            items: orderData,
-            paymentMethod: selectedPaymentMethod,
-            total: total,
-            date: new Date().toISOString(),
-            status: "processing",
-          };
-
-          // Bersihkan keranjang setelah pembayaran dikonfirmasi
-          localStorage.removeItem("favfood_cart");
-
-          // Simpan ke riwayat pesanan (opsional)
-          const existingHistory = localStorage.getItem("favfood_order_history");
-          let history = [];
-          if (existingHistory) {
-            try {
-              history = JSON.parse(existingHistory);
-            } catch (e) {
-              console.error("Gagal membaca riwayat pesanan", e);
-            }
-          }
-          history.push(orderHistory);
-          localStorage.setItem(
-            "favfood_order_history",
-            JSON.stringify(history)
-          );
-
-          alert("Pembayaran berhasil! Terima kasih atas pesanan Anda.");
-
-          // Redirect ke halaman utama
-          window.location.href = "index.html";
-        }
+        alert("Pembayaran berhasil! Terima kasih atas pesanan Anda.");
+        window.location.href = "index.html";
       }
 
       document.addEventListener("DOMContentLoaded", loadOrder);

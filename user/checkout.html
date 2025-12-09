@@ -18,143 +18,145 @@
       };
     </script>
   </head>
-  <body class="bg-gray-50">
-    <!-- Header -->
-    <header class="bg-white shadow-md sticky top-0 z-50">
-      <div
-        class="container mx-auto px-4 py-4 flex items-center justify-between relative"
-      >
-        <a
-          href="index.html"
-          class="text-sm text-primary hover:underline flex items-center space-x-1"
-        >
-          <i class="fas fa-arrow-left text-lg"></i>
-        </a>
-
-        <p
-          class="absolute left-1/2 -translate-x-1/2 font-bold text-lg text-primary"
-        >
-          Pesanan
-        </p>
-      </div>
-    </header>
-
-    <!-- Content -->
-    <main class="container mx-auto px-4 py-8">
-      <h2 class="text-2xl md:text-3xl font-bold text-primary mb-6">
-        Detail Pesanan
-      </h2>
-
-      <div id="empty-state" class="hidden">
-        <div
-          class="bg-white rounded-lg shadow-md p-6 flex flex-col items-center text-center"
-        >
-          <i class="fas fa-shopping-cart text-4xl text-gray-300 mb-4"></i>
-          <p class="text-gray-600 mb-4">Belum ada pesanan di keranjang Anda.</p>
-          <a
-            href="index.html"
-            class="bg-primary text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-opacity-90 transition"
+  <body class="bg-white w-full md:w-1/2 mx-auto">
+    <div class="bg-gray-200 md:pb-6 min-h-screen">
+      <div>
+        <header class="bg-white shadow-md sticky top-0 z-50">
+          <div
+            class="container mx-auto px-4 py-4 flex items-center justify-between relative"
           >
-            Kembali ke Menu
-          </a>
-        </div>
-      </div>
+            <a
+              href="index.html"
+              class="text-sm text-primary flex items-center space-x-1"
+            >
+              <i class="fas fa-arrow-left text-lg"></i>
+            </a>
 
-      <div id="order-detail" class="space-y-6 hidden">
-        <!-- Ringkasan Item -->
-        <div class="bg-white rounded-lg shadow-md p-4 md:p-6">
-          <div class="flex items-center justify-between mb-4">
-            <h3 class="text-lg font-semibold text-gray-800">Pesanan Anda</h3>
-            <span id="order-count" class="text-sm text-gray-500"></span>
+            <p
+              class="absolute left-1/2 -translate-x-1/2 font-bold text-lg text-primary"
+            >
+              Pesanan
+            </p>
+          </div>
+        </header>
+
+        <!-- Content -->
+        <main class="container mx-auto px-4 md:px-8 pt-6 pb-8 md:pt-8 md:pb-16">
+
+          <div id="empty-state" class="hidden">
+            <div
+              class="bg-white rounded-lg shadow-md p-6 flex flex-col items-center text-center"
+            >
+              <i class="fas fa-shopping-cart text-4xl text-gray-300 mb-4"></i>
+              <p class="text-gray-600 mb-4">
+                Belum ada pesanan di keranjang Anda.
+              </p>
+              <a
+                href="index.html"
+                class="bg-primary text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-opacity-90 transition"
+              >
+                Kembali ke Menu
+              </a>
+            </div>
           </div>
 
-          <div id="order-items" class="divide-y divide-gray-200"></div>
-        </div>
+          <div id="order-detail" class="space-y-6 hidden">
+            <!-- Ringkasan Item -->
+            <div class="bg-white rounded-lg shadow-md p-4 md:p-6">
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-semibold text-gray-800">
+                  Pesanan Anda
+                </h3>
+                <span id="order-count" class="text-sm text-gray-500"></span>
+              </div>
 
-        <!-- Ringkasan Pembayaran -->
-        <div class="bg-white rounded-lg shadow-md p-4 md:p-6 space-y-4">
-          <h3 class="text-lg font-semibold text-gray-800">
-            Ringkasan Pembayaran
-          </h3>
-          <div class="flex items-center justify-between">
-            <span class="text-gray-600">Total</span>
-            <span
-              id="order-total"
-              class="text-xl font-bold text-primary"
-            ></span>
+              <div id="order-items" class="divide-y divide-gray-200"></div>
+            </div>
+
+            <!-- Ringkasan Pembayaran -->
+            <div class="bg-white rounded-lg shadow-md p-4 md:p-6 space-y-4">
+              <h3 class="text-lg font-semibold text-gray-800">
+                Ringkasan Pembayaran
+              </h3>
+              <div class="flex items-center justify-between">
+                <span class="text-gray-600">Total</span>
+                <span
+                  id="order-total"
+                  class="text-xl font-bold text-primary"
+                ></span>
+              </div>
+            </div>
+
+            <!-- Aksi -->
+            <div
+              class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3"
+            >
+              <a
+                href="index.html"
+                class="w-full md:w-auto text-center border border-primary text-primary px-4 py-2 rounded-lg text-sm font-semibold hover:bg-gray-50 transition"
+              >
+                Ubah Pesanan
+              </a>
+              <button
+                onclick="confirmOrder()"
+                class="w-full md:w-auto bg-primary text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-opacity-90 transition"
+              >
+                Bayar
+              </button>
+            </div>
           </div>
-        </div>
+        </main>
 
-        <!-- Aksi -->
-        <div
-          class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3"
-        >
-          <a
-            href="index.html"
-            class="w-full md:w-auto text-center border border-primary text-primary px-4 py-2 rounded-lg text-sm font-semibold hover:bg-gray-50 transition"
-          >
-            Ubah Pesanan
-          </a>
-          <button
-            onclick="confirmOrder()"
-            class="w-full md:w-auto bg-primary text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-opacity-90 transition"
-          >
-            Bayar
-          </button>
-        </div>
-      </div>
-    </main>
-
-    <script>
-      function formatRupiah(number) {
-        return "Rp " + Number(number).toLocaleString("id-ID");
-      }
-
-      function loadOrder() {
-        const rawCart = localStorage.getItem("favfood_cart");
-        let cart = [];
-        if (rawCart) {
-          try {
-            const parsed = JSON.parse(rawCart);
-            if (Array.isArray(parsed)) {
-              cart = parsed;
-            }
-          } catch (e) {
-            console.error("Gagal membaca data keranjang", e);
+        <script>
+          function formatRupiah(number) {
+            return "Rp " + Number(number).toLocaleString("id-ID");
           }
-        }
 
-        const emptyState = document.getElementById("empty-state");
-        const orderDetail = document.getElementById("order-detail");
+          function loadOrder() {
+            const rawCart = localStorage.getItem("favfood_cart");
+            let cart = [];
+            if (rawCart) {
+              try {
+                const parsed = JSON.parse(rawCart);
+                if (Array.isArray(parsed)) {
+                  cart = parsed;
+                }
+              } catch (e) {
+                console.error("Gagal membaca data keranjang", e);
+              }
+            }
 
-        if (!cart.length) {
-          emptyState.classList.remove("hidden");
-          orderDetail.classList.add("hidden");
-          return;
-        }
+            const emptyState = document.getElementById("empty-state");
+            const orderDetail = document.getElementById("order-detail");
 
-        emptyState.classList.add("hidden");
-        orderDetail.classList.remove("hidden");
+            if (!cart.length) {
+              emptyState.classList.remove("hidden");
+              orderDetail.classList.add("hidden");
+              return;
+            }
 
-        const orderItemsEl = document.getElementById("order-items");
-        const orderTotalEl = document.getElementById("order-total");
-        const orderCountEl = document.getElementById("order-count");
+            emptyState.classList.add("hidden");
+            orderDetail.classList.remove("hidden");
 
-        const totalItems = cart.reduce(
-          (sum, item) => sum + (item.quantity || 0),
-          0
-        );
-        const totalPrice = cart.reduce(
-          (sum, item) => sum + item.price * (item.quantity || 0),
-          0
-        );
+            const orderItemsEl = document.getElementById("order-items");
+            const orderTotalEl = document.getElementById("order-total");
+            const orderCountEl = document.getElementById("order-count");
 
-        orderCountEl.textContent = `${totalItems} item`;
-        orderTotalEl.textContent = formatRupiah(totalPrice);
+            const totalItems = cart.reduce(
+              (sum, item) => sum + (item.quantity || 0),
+              0
+            );
+            const totalPrice = cart.reduce(
+              (sum, item) => sum + item.price * (item.quantity || 0),
+              0
+            );
 
-        orderItemsEl.innerHTML = cart
-          .map(
-            (item) => `
+            orderCountEl.textContent = `${totalItems} item`;
+            orderTotalEl.textContent = formatRupiah(totalPrice);
+
+            orderItemsEl.innerHTML = cart
+              .map(
+                (item) => `
           <div class="py-3 flex items-start justify-between space-x-4">
             <div class="flex items-start space-x-3 flex-1">
               <img
@@ -198,78 +200,80 @@
             </div>
           </div>
         `
-          )
-          .join("");
-      }
-
-      function updateItemQuantity(itemId, change) {
-        const rawCart = localStorage.getItem("favfood_cart");
-        if (!rawCart) {
-          return;
-        }
-
-        let cart = [];
-        try {
-          const parsed = JSON.parse(rawCart);
-          if (Array.isArray(parsed)) {
-            cart = parsed;
+              )
+              .join("");
           }
-        } catch (e) {
-          console.error("Gagal membaca data keranjang", e);
-          return;
-        }
 
-        const item = cart.find((i) => i.id === itemId);
-        if (!item) {
-          return;
-        }
+          function updateItemQuantity(itemId, change) {
+            const rawCart = localStorage.getItem("favfood_cart");
+            if (!rawCart) {
+              return;
+            }
 
-        item.quantity = (item.quantity || 0) + change;
+            let cart = [];
+            try {
+              const parsed = JSON.parse(rawCart);
+              if (Array.isArray(parsed)) {
+                cart = parsed;
+              }
+            } catch (e) {
+              console.error("Gagal membaca data keranjang", e);
+              return;
+            }
 
-        // Jika quantity <= 0, hapus item dari cart
-        if (item.quantity <= 0) {
-          cart = cart.filter((i) => i.id !== itemId);
-        }
+            const item = cart.find((i) => i.id === itemId);
+            if (!item) {
+              return;
+            }
 
-        // Simpan kembali ke localStorage
-        try {
-          localStorage.setItem("favfood_cart", JSON.stringify(cart));
-        } catch (e) {
-          console.error("Gagal menyimpan data keranjang", e);
-          return;
-        }
+            item.quantity = (item.quantity || 0) + change;
 
-        // Reload order display
-        loadOrder();
-      }
+            // Jika quantity <= 0, hapus item dari cart
+            if (item.quantity <= 0) {
+              cart = cart.filter((i) => i.id !== itemId);
+            }
 
-      function confirmOrder() {
-        const rawCart = localStorage.getItem("favfood_cart");
-        if (!rawCart) {
-          alert("Tidak ada pesanan untuk dikonfirmasi.");
-          return;
-        }
+            // Simpan kembali ke localStorage
+            try {
+              localStorage.setItem("favfood_cart", JSON.stringify(cart));
+            } catch (e) {
+              console.error("Gagal menyimpan data keranjang", e);
+              return;
+            }
 
-        let cart = [];
-        try {
-          const parsed = JSON.parse(rawCart);
-          if (Array.isArray(parsed)) {
-            cart = parsed;
+            // Reload order display
+            loadOrder();
           }
-        } catch (e) {
-          console.error(e);
-        }
 
-        if (!cart.length) {
-          alert("Tidak ada pesanan untuk dikonfirmasi.");
-          return;
-        }
+          function confirmOrder() {
+            const rawCart = localStorage.getItem("favfood_cart");
+            if (!rawCart) {
+              alert("Tidak ada pesanan untuk dikonfirmasi.");
+              return;
+            }
 
-        // Arahkan ke halaman pembayaran
-        window.location.href = "payment.html";
-      }
+            let cart = [];
+            try {
+              const parsed = JSON.parse(rawCart);
+              if (Array.isArray(parsed)) {
+                cart = parsed;
+              }
+            } catch (e) {
+              console.error(e);
+            }
 
-      document.addEventListener("DOMContentLoaded", loadOrder);
-    </script>
+            if (!cart.length) {
+              alert("Tidak ada pesanan untuk dikonfirmasi.");
+              return;
+            }
+
+            // Arahkan ke halaman pembayaran
+            window.location.href = "payment.html";
+          }
+
+          document.addEventListener("DOMContentLoaded", loadOrder);
+        </script>
+      </div>
+    </div>
   </body>
 </html>

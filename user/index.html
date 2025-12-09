@@ -28,7 +28,7 @@
     </script>
   </head>
   <body class="bg-white w-full md:w-1/2 mx-auto">
-    <div class="bg-white md:min-h-screen md:px-6 md:pb-6 md:pt-0">
+    <div class="bg-gray-200">
       <div>
         <header class="bg-primary">
           <div class="container mx-auto px-4 py-4 md:px-6 md:py-6">
@@ -52,7 +52,7 @@
           />
         </section>
 
-        <section>
+        <section class="pb-20 md:pb-24">
           <div class="container mx-auto">
             <div
               class="flex items-center justify-center mb-8 relative bg-primary sticky top-0 z-40 py-2 px-4 shadow-md w-full md:shadow-md"
@@ -295,7 +295,7 @@
           if (items.length === 0) return;
 
           html += `
-            <div id="category-${categoryKey}" class="mb-12 md:mb-16 px-4">
+            <div id="category-${categoryKey}" class="mb-16 md:mb-16 px-4">
               <div class="flex items-center justify-center mb-10">
                 <h3 class="text-2xl md:text-3xl font-bold text-primary border-b-2 border-primary flex justify-center">
                   ${categoryLabels[categoryKey]}
@@ -524,15 +524,11 @@
           footerBadge.classList.remove("hidden");
           footerTotal.textContent = `Rp ${total.toLocaleString("id-ID")}`;
           footerCheckoutCount.textContent = `(${count})`;
-
-          document.body.style.paddingBottom = "80px";
         } else {
           footer.classList.add("hidden");
           footerBadge.classList.add("hidden");
           footerTotal.textContent = "Rp 0";
           footerCheckoutCount.textContent = "(0)";
-
-          document.body.style.paddingBottom = "0";
         }
       }
 
