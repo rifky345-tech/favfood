@@ -6,6 +6,15 @@
     <title>Checkout - FavFood</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="css/icon.css" />
+    <style>
+      .line-clamp-2 {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    </style>
     <script>
       tailwind.config = {
         theme: {
@@ -42,7 +51,6 @@
 
         <!-- Content -->
         <main class="container mx-auto px-4 md:px-8 pt-6 pb-8 md:pt-8 md:pb-16">
-
           <div id="empty-state" class="hidden">
             <div
               class="bg-white rounded-lg shadow-md p-6 flex flex-col items-center text-center"
@@ -61,7 +69,7 @@
           </div>
 
           <div id="order-detail" class="space-y-6 hidden">
-            <!-- Ringkasan Item -->
+            <!-- Ringkasan Item dan Pembayaran -->
             <div class="bg-white rounded-lg shadow-md p-4 md:p-6">
               <div class="flex items-center justify-between mb-4">
                 <h3 class="text-lg font-semibold text-gray-800">
@@ -70,20 +78,23 @@
                 <span id="order-count" class="text-sm text-gray-500"></span>
               </div>
 
-              <div id="order-items" class="divide-y divide-gray-200"></div>
-            </div>
+              <div id="order-items"></div>
 
-            <!-- Ringkasan Pembayaran -->
-            <div class="bg-white rounded-lg shadow-md p-4 md:p-6 space-y-4">
-              <h3 class="text-lg font-semibold text-gray-800">
-                Ringkasan Pembayaran
-              </h3>
-              <div class="flex items-center justify-between">
-                <span class="text-gray-600">Total</span>
-                <span
-                  id="order-total"
-                  class="text-xl font-bold text-primary"
-                ></span>
+              <div class="mt-6 border-l-4 border-primary pl-1">
+                <div id="notes-display" class="space-y-1 min-w-0"></div>
+              </div>
+
+              <div class="border-t border-gray-500 mt-10 pt-4">
+                <h3 class="text-lg font-semibold text-black mb-4">
+                  Ringkasan Pembayaran
+                </h3>
+                <div class="flex items-center justify-between">
+                  <span class="text-black font-bold">Total</span>
+                  <span
+                    id="order-total"
+                    class="text-xl font-bold text-black"
+                  ></span>
+                </div>
               </div>
             </div>
 
@@ -93,7 +104,7 @@
             >
               <a
                 href="index.html"
-                class="w-full md:w-auto text-center border border-primary text-primary px-4 py-2 rounded-lg text-sm font-semibold hover:bg-gray-50 transition"
+                class="w-full md:w-auto text-center border border-black text-black px-4 py-2 rounded-lg text-sm font-semibold hover:bg-gray-50 transition"
               >
                 Ubah Pesanan
               </a>
@@ -107,9 +118,109 @@
           </div>
         </main>
 
+        <!-- Notes Modal -->
+        <div
+          id="notes-modal"
+          class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-end justify-center"
+        >
+          <div
+            class="bg-white w-full md:w-2/5 rounded-t-2xl shadow-lg max-h-[80vh] overflow-y-auto"
+          >
+            <div
+              class="sticky top-0 bg-white border-b border-gray-200 px-4 py-4 flex items-center justify-between rounded-t-2xl"
+            >
+              <h3 class="text-lg font-bold text-black">Notes</h3>
+              <button onclick="closeNotesModal()" class="text-black">
+                <i class="fas fa-times text-xl"></i>
+              </button>
+            </div>
+            <div class="p-4">
+              <label
+                for="customer-notes"
+                class="block text-sm font-medium text-gray-700 mb-2"
+              >
+              </label>
+              <textarea
+                id="customer-notes"
+                name="customer-notes"
+                rows="6"
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent resize-none text-gray-700"
+              ></textarea>
+              <button
+                onclick="addCustomerNote()"
+                class="w-full mt-4 bg-primary text-white px-4 py-3 rounded-lg text-sm font-semibold"
+              >
+                Add
+              </button>
+            </div>
+          </div>
+        </div>
+
         <script>
+          let customerNotes = "";
+
           function formatRupiah(number) {
             return "Rp " + Number(number).toLocaleString("id-ID");
+          }
+
+          function openNotesModal() {
+            const modal = document.getElementById("notes-modal");
+            const textarea = document.getElementById("customer-notes");
+            const savedNote = localStorage.getItem("favfood_customer_note");
+            if (savedNote) {
+              textarea.value = savedNote;
+              customerNotes = savedNote;
+            }
+            modal.classList.remove("hidden");
+            setTimeout(() => textarea.focus(), 100);
+          }
+
+          function closeNotesModal() {
+            const modal = document.getElementById("notes-modal");
+            modal.classList.add("hidden");
+          }
+
+          function addCustomerNote() {
+            const textarea = document.getElementById("customer-notes");
+            const noteText = textarea.value.trim();
+            customerNotes = noteText;
+            localStorage.setItem("favfood_customer_note", noteText);
+            renderNotes();
+            closeNotesModal();
+          }
+
+          function renderNotes() {
+            const notesDisplay = document.getElementById("notes-display");
+            const savedNote = localStorage.getItem("favfood_customer_note");
+
+            if (savedNote && savedNote.trim()) {
+              notesDisplay.innerHTML = `
+                <div 
+                  onclick="openNotesModal()"
+                  class="flex items-center space-x-2 cursor-pointer"
+                >
+                  <i class="fa-solid fa-file-pen text-lg italic font-semibold flex-shrink-0 text-primary"></i>
+                  <div 
+                    class="flex-1 min-w-0 italic text-black"
+                    style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; word-break: break-word; line-height: 1.5em; max-height: 3em;"
+                  >${savedNote}</div>
+                </div>
+              `;
+            } else {
+              notesDisplay.innerHTML = `
+                <div 
+                  onclick="openNotesModal()"
+                  class="flex items-center space-x-1 text-primary cursor-pointer text-lg"
+                >
+                  <i class="fa-solid fa-file-pen text-md italic font-semibold flex-shrink-0"></i>
+                  <span class="text-sm font-medium italic text-gray-500">Notes</span>
+                </div>
+              `;
+            }
+          }
+
+          function loadNotes() {
+            renderNotes();
           }
 
           function loadOrder() {
@@ -271,7 +382,20 @@
             window.location.href = "payment.html";
           }
 
-          document.addEventListener("DOMContentLoaded", loadOrder);
+          document.addEventListener("DOMContentLoaded", () => {
+            loadOrder();
+            loadNotes();
+
+            // Close modal when clicking outside
+            const modal = document.getElementById("notes-modal");
+            if (modal) {
+              modal.addEventListener("click", function (e) {
+                if (e.target === this) {
+                  closeNotesModal();
+                }
+              });
+            }
+          });
         </script>
       </div>
     </div>
