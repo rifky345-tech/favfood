@@ -19,6 +19,28 @@
         border-color: #05113b;
         background-color: #fff;
       }
+      .form-field {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .form-label {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: #000;
+      }
+      .form-input {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border: 1.5px solid #d1d5db;
+        border-radius: 0.75rem;
+        background: #fff;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease,
+        background-color 0.5s ease;
+      }
     </style>
     <script>
       tailwind.config = {
@@ -75,59 +97,45 @@
             </h3>
 
             <div class="space-y-4 mb-6">
-              <label
-                for="meja-number"
-                class="block text-sm font-medium text-black"
-              >
-                Meja
-              </label>
-              <input
-                type="number"
-                id="meja-number"
-                name="meja-number"
-                placeholder="1"
-                class="w-full px-4 py-2 border border-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-              />
+              <div class="form-field">
+                <label for="meja-number" class="form-label">Meja</label>
+                <input
+                  type="number"
+                  id="meja-number"
+                  name="meja-number"
+                  placeholder="1"
+                  class="form-input"
+                />
+              </div>
             </div>
             <div class="space-y-4 mb-6">
-              <div>
-                <label
-                  for="tipe-pesanan"
-                  class="text-sm font-medium text-black mb-2"
+              <div class="form-field">
+                <label for="tipe-pesanan" class="form-label"
+                  >Tipe Pesanan</label
                 >
-                  Tipe Pesanan
-                </label>
                 <select
                   id="tipe-pesanan"
                   name="tipe-pesanan"
-                  class="w-full px-4 py-2 border border-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent bg-white"
+                  class="form-input bg-white"
                 >
                   <option value="Dine In">Dine In</option>
                   <option value="Take Away">Take Away</option>
                 </select>
               </div>
 
-              <div>
-                <label
-                  for="customer-name"
-                  class="block text-sm font-medium text-black mb-2"
-                >
-                  Nama
-                </label>
+              <div class="form-field">
+                <label for="customer-name" class="form-label"> Nama </label>
                 <input
                   type="text"
                   id="customer-name"
                   name="customer-name"
                   placeholder="Masukkan nama lengkap"
-                  class="w-full px-4 py-2 border border-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                  class="form-input"
                 />
               </div>
 
-              <div>
-                <label
-                  for="customer-phone"
-                  class="block text-sm font-medium text-black mb-2"
-                >
+              <div class="form-field">
+                <label for="customer-phone" class="form-label">
                   Nomor Telepon
                 </label>
                 <input
@@ -135,7 +143,7 @@
                   id="customer-phone"
                   name="customer-phone"
                   placeholder="Masukkan nomor telepon"
-                  class="w-full px-4 py-2 border border-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                  class="form-input"
                 />
               </div>
             </div>
