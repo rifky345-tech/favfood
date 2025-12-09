@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pemesanan Online - FavFood</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/icon.css" />
+    <style>
+      .category-scroll::-webkit-scrollbar {
+        display: none;
+      }
+      .category-scroll {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+    </style>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#05113b",
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-white m-0 overflow-x-hidden">
+    <header class="bg-white">
+      <div class="container mx-auto px-4 py-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-3">
+            <i class="fas fa-utensils text-2xl text-primary"></i>
+            <h1 class="text-2xl font-bold text-primary">FavFood</h1>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section id="home" class="w-full relative overflow-hidden bg-primary">
+      <img
+        src="media/hero.jpeg"
+        alt="FavFood Banner"
+        class="block w-full h-full object-cover blur-sm scale-110"
+      />
+    </section>
+
+    <section>
+      <div class="container mx-auto px-4">
+        <div
+          class="flex items-center mb-8 relative bg-primary sticky top-0 z-40 py-2 -mx-4 px-4 shadow-md"
+        >
+          <p class="px-4 py-1 text-md bg-white text-primary transition">
+            Filter
+          </p>
+
+          <div
+            class="category-scroll flex flex-nowrap gap-3 overflow-x-auto py-1"
+          >
+            <button
+              onclick="scrollToCategory('all')"
+              class="category-btn active px-3 py-1 ml-2 text-sm text-white border-b-4 border-white"
+            >
+              Semua
+            </button>
+            <button
+              onclick="scrollToCategory('makanan')"
+              class="category-btn px-3 py-1 text-sm text-white"
+            >
+              Makanan
+            </button>
+            <button
+              onclick="scrollToCategory('minuman')"
+              class="category-btn px-3 py-1 text-sm text-white"
+            >
+              Minuman
+            </button>
+            <button
+              onclick="scrollToCategory('snack')"
+              class="category-btn px-3 py-1 text-sm text-white"
+            >
+              Snack
+            </button>
+          </div>
+        </div>
+
+        <div id="menu-container"></div>
+      </div>
+    </section>
+    <footer
+      id="checkout-footer"
+      class="fixed bottom-5 left-5 right-5 bg-primary text-white z-40 hidden rounded-lg"
+    >
+      <div class="container mx-auto px-4 py-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center">
+            <div class="relative">
+              <i class="fas fa-shopping-cart text-white text-2xl"></i>
+              <span
+                id="footer-cart-badge"
+                class="absolute -top-2 -right-2 bg-white text-primary text-xs font-bold rounded-full w-3 h-3 flex items-center justify-center hidden"
+              >
+                0
+              </span>
+            </div>
+            <div class="flex flex-col ml-3 md:ml-10">
+              <span class="text-sm text-left">Total</span>
+              <span id="footer-total" class="text-xl font-bold text-right">
+                Rp 0
+              </span>
+            </div>
+          </div>
+
+          <button
+            onclick="checkout()"
+            class="bg-white text-primary px-3 py-3 rounded-lg text-sm font-semibold hover:bg-gray-100 transition flex items-center space-x-1"
+          >
+            <span>CHECK OUT</span>
+            <span id="footer-checkout-count" class="text-primary"> (0) </span>
+          </button>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Menu Data
+      const menuItems = [
+        {
+          id: 1,
+          name: "Nasi Goreng Spesial",
+          category: "makanan",
+          price: 25000,
+          image:
+            "https://images.unsplash.com/photo-1680674814945-7945d913319c?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          description: "Nasi goreng dengan telur, ayam, dan kerupuk",
+        },
+        {
+          id: 2,
+          name: "Mie Ayam Bakso",
+          category: "makanan",
+          price: 20000,
+          image:
+            "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=400&h=300&fit=crop",
+          description: "Mie ayam dengan bakso dan pangsit",
+        },
+        {
+          id: 3,
+          name: "Gado-Gado",
+          category: "makanan",
+          price: 18000,
+          image:
+            "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop",
+          description: "Sayuran segar dengan bumbu kacang",
+        },
+        {
+          id: 4,
+          name: "Rendang",
+          category: "makanan",
+          price: 35000,
+          image:
+            "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=400&h=300&fit=crop",
+          description: "Daging sapi rendang dengan bumbu rempah",
+        },
+        {
+          id: 5,
+          name: "Sate Ayam",
+          category: "makanan",
+          price: 28000,
+          image:
+            "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&h=300&fit=crop",
+          description: "Sate ayam dengan bumbu kacang",
+        },
+        {
+          id: 6,
+          name: "Es Teh Manis",
+          category: "minuman",
+          price: 8000,
+          image:
+            "https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400&h=300&fit=crop",
+          description: "Es teh manis segar",
+        },
+        {
+          id: 7,
+          name: "Es Jeruk",
+          category: "minuman",
+          price: 10000,
+          image:
+            "https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=400&h=300&fit=crop",
+          description: "Es jeruk peras segar",
+        },
+        {
+          id: 8,
+          name: "Kopi Hitam",
+          category: "minuman",
+          price: 12000,
+          image:
+            "https://plus.unsplash.com/premium_photo-1723559972702-2659e41dbb5b?q=80&w=736&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          description: "Kopi hitam pilihan",
+        },
+        {
+          id: 9,
+          name: "Jus Alpukat",
+          category: "minuman",
+          price: 15000,
+          image:
+            "https://media.istockphoto.com/id/1336450970/photo/jus-alpukat-or-avocado-juice-vegan-diet-and-nutrition-healthy-concepts-drinks.webp?a=1&b=1&s=612x612&w=0&k=20&c=pQeBMGGLUZOzl7r_D8wwY8geSfgzMFQLHbVaMr9r-cE=",
+          description: "Jus alpukat segar",
+        },
+        {
+          id: 10,
+          name: "Keripik Singkong",
+          category: "snack",
+          price: 12000,
+          image:
+            "https://media.istockphoto.com/id/2235977568/photo/delicious-sweet-cassava-chips-aka-keripik-singkong-on-a-wooden-plate-food-photography.webp?a=1&b=1&s=612x612&w=0&k=20&c=NtHkxiVRKtmeq4Phe-oIDYsviSk4dwBSFUtvCwuVrWE=",
+          description: "Keripik singkong renyah",
+        },
+        {
+          id: 11,
+          name: "Brownies",
+          category: "snack",
+          price: 10000,
+          image:
+            "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=400&h=300&fit=crop",
+          description: "Brownies",
+        },
+        {
+          id: 12,
+          name: "Lumpia",
+          category: "snack",
+          price: 15000,
+          image:
+            "https://media.istockphoto.com/id/2230179694/photo/crispy-filipino-lumpia-served-with-spicy-tomato-salsa-in-siargao.webp?a=1&b=1&s=612x612&w=0&k=20&c=vv2hgVDLpKGccsya7SQjmEmZ1OET99zH9vnjNG0-lxA=",
+          description: "Lumpia goreng isi sayuran",
+        },
+      ];
+
+      let cart = [];
+      let currentCategory = "all";
+
+      // Initialize
+      document.addEventListener("DOMContentLoaded", function () {
+        // Restore cart from localStorage if available
+        const savedCart = localStorage.getItem("favfood_cart");
+        if (savedCart) {
+          try {
+            const parsedCart = JSON.parse(savedCart);
+            if (Array.isArray(parsedCart)) {
+              cart = parsedCart;
+            }
+          } catch (e) {
+            console.error("Gagal memuat keranjang dari localStorage", e);
+          }
+        }
+
+        renderMenu();
+        updateCart();
+        updateCartCount();
+      });
+
+      // Render Menu by Category
+      function renderMenu() {
+        const menuContainer = document.getElementById("menu-container");
+
+        // Group items by category
+        const categories = {
+          makanan: menuItems.filter((item) => item.category === "makanan"),
+          minuman: menuItems.filter((item) => item.category === "minuman"),
+          snack: menuItems.filter((item) => item.category === "snack"),
+        };
+
+        // Category labels
+        const categoryLabels = {
+          makanan: "Makanan",
+          minuman: "Minuman",
+          snack: "Snack",
+        };
+
+        let html = "";
+
+        // Render each category section
+        Object.keys(categories).forEach((categoryKey) => {
+          const items = categories[categoryKey];
+          if (items.length === 0) return;
+
+          html += `
+            <div id="category-${categoryKey}" class="mb-12 md:mb-16">
+              <div class="flex items-center justify-center mb-10">
+                <h3 class="text-2xl md:text-3xl font-bold text-primary border-b-2 border-primary w-20 flex justify-center">
+                  ${categoryLabels[categoryKey]}
+                </h3>
+              </div>
+              <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-6 lg:gap-8">
+                ${items
+                  .map(
+                    (item) => `
+                  <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition">
+                    <img
+                      src="${item.image}"
+                      alt="${item.name}"
+                      class="w-full h-32 sm:h-40 lg:h-48 object-cover"
+                    />
+                    <div class="p-2 sm:p-3 lg:p-4">
+                      <h3 class="text-sm sm:text-base lg:text-xl font-semibold mb-1 sm:mb-2 text-gray-800 line-clamp-2">${
+                        item.name
+                      }</h3>
+                      <p class="text-gray-600 text-xs sm:text-sm mb-2 sm:mb-3 line-clamp-2 hidden sm:block">${
+                        item.description
+                      }</p>
+                      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0">
+                        <span class="text-base sm:text-lg lg:text-2xl font-bold text-primary">Rp ${item.price.toLocaleString(
+                          "id-ID"
+                        )}</span>
+                        <button
+                          onclick="addToCart(${item.id})"
+                          class="w-full sm:w-auto bg-primary text-white px-2 sm:px-3 lg:px-4 py-1.5 sm:py-2 rounded-lg hover:bg-opacity-90 transition text-xs sm:text-sm lg:text-base"
+                        >
+                          <i class="fas fa-plus"></i> <span class="hidden sm:inline">Tambah</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                `
+                  )
+                  .join("")}
+              </div>
+            </div>
+          `;
+        });
+
+        menuContainer.innerHTML = html;
+      }
+
+      // Scroll to Category
+      function scrollToCategory(category) {
+        const buttons = document.querySelectorAll(".category-btn");
+        buttons.forEach((btn) => {
+          btn.classList.remove(
+            "active",
+            "text-primary",
+            "border-b-4",
+            "border-primary",
+            "border-white"
+          );
+          btn.classList.add("text-white");
+        });
+        event.target.classList.add("active", "border-b-4", "border-white");
+
+        if (category === "all") {
+          // Scroll to top of menu section
+          const menuSection = document.querySelector("section.py-12 md:py-16");
+          if (menuSection) {
+            menuSection.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        } else {
+          // Scroll to specific category
+          const categoryElement = document.getElementById(
+            `category-${category}`
+          );
+          if (categoryElement) {
+            categoryElement.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        }
+      }
+
+      // Add to Cart
+      function addToCart(itemId) {
+        const item = menuItems.find((i) => i.id === itemId);
+        const existingItem = cart.find((i) => i.id === itemId);
+
+        if (existingItem) {
+          existingItem.quantity += 1;
+        } else {
+          cart.push({ ...item, quantity: 1 });
+        }
+
+        updateCart();
+        updateCartCount();
+      }
+
+      // Remove from Cart
+      function removeFromCart(itemId) {
+        cart = cart.filter((item) => item.id !== itemId);
+        updateCart();
+        updateCartCount();
+      }
+
+      // Update Quantity
+      function updateQuantity(itemId, change) {
+        const item = cart.find((i) => i.id === itemId);
+        if (item) {
+          item.quantity += change;
+          if (item.quantity <= 0) {
+            removeFromCart(itemId);
+            return;
+          }
+          updateCart();
+          updateCartCount();
+        }
+      }
+
+      // Update Cart Display
+      function updateCart() {
+        const cartItems = document.getElementById("cart-items");
+        const cartTotal = document.getElementById("cart-total");
+
+        if (cart.length === 0) {
+          if (cartItems) {
+            cartItems.innerHTML =
+              '<p class="text-gray-500 text-center py-8">Keranjang kosong</p>';
+          }
+          if (cartTotal) {
+            cartTotal.textContent = "Rp 0";
+          }
+          updateFooterCheckout();
+          return;
+        }
+
+        const total = cart.reduce(
+          (sum, item) => sum + item.price * item.quantity,
+          0
+        );
+
+        if (cartItems) {
+          cartItems.innerHTML = cart
+            .map(
+              (item) => `
+          <div class="flex items-center space-x-4 mb-4 pb-4 border-b">
+            <img
+              src="${item.image}"
+              alt="${item.name}"
+              class="w-20 h-20 object-cover rounded-lg"
+            />
+            <div class="flex-1">
+              <h4 class="font-semibold">${item.name}</h4>
+              <p class="text-sm text-gray-600">Rp ${item.price.toLocaleString(
+                "id-ID"
+              )}</p>
+              <div class="flex items-center space-x-2 mt-2">
+                <button
+                  onclick="updateQuantity(${item.id}, -1)"
+                  class="w-8 h-8 bg-gray-200 rounded flex items-center justify-center hover:bg-gray-300"
+                >
+                  <i class="fas fa-minus text-xs"></i>
+                </button>
+                <span class="w-8 text-center">${item.quantity}</span>
+                <button
+                  onclick="updateQuantity(${item.id}, 1)"
+                  class="w-8 h-8 bg-gray-200 rounded flex items-center justify-center hover:bg-gray-300"
+                >
+                  <i class="fas fa-plus text-xs"></i>
+                </button>
+              </div>
+            </div>
+            <div class="text-right">
+              <p class="font-semibold text-primary">Rp ${(
+                item.price * item.quantity
+              ).toLocaleString("id-ID")}</p>
+              <button
+                onclick="removeFromCart(${item.id})"
+                class="text-red-500 hover:text-red-700 mt-2"
+              >
+                <i class="fas fa-trash"></i>
+              </button>
+            </div>
+          </div>
+        `
+            )
+            .join("");
+        }
+
+        if (cartTotal) {
+          cartTotal.textContent = `Rp ${total.toLocaleString("id-ID")}`;
+        }
+
+        updateFooterCheckout();
+      }
+
+      // Update Cart Count
+      function updateCartCount() {
+        const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+        const badge = document.getElementById("cart-count");
+        if (badge) {
+          if (count > 0) {
+            badge.textContent = count;
+            badge.classList.remove("hidden");
+          } else {
+            badge.classList.add("hidden");
+          }
+        }
+
+        // Update footer checkout bar
+        updateFooterCheckout();
+      }
+
+      // Update Footer Checkout Bar
+      function updateFooterCheckout() {
+        const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+        const total = cart.reduce(
+          (sum, item) => sum + item.price * item.quantity,
+          0
+        );
+        const footer = document.getElementById("checkout-footer");
+        const footerBadge = document.getElementById("footer-cart-badge");
+        const footerTotal = document.getElementById("footer-total");
+        const footerCheckoutCount = document.getElementById(
+          "footer-checkout-count"
+        );
+
+        if (count > 0) {
+          footer.classList.remove("hidden");
+          footerBadge.textContent = count;
+          footerBadge.classList.remove("hidden");
+          footerTotal.textContent = `Rp ${total.toLocaleString("id-ID")}`;
+          footerCheckoutCount.textContent = `(${count})`;
+
+          document.body.style.paddingBottom = "80px";
+        } else {
+          footer.classList.add("hidden");
+          footerBadge.classList.add("hidden");
+          footerTotal.textContent = "Rp 0";
+          footerCheckoutCount.textContent = "(0)";
+
+          document.body.style.paddingBottom = "0";
+        }
+      }
+
+      // Toggle Cart
+      function toggleCart() {
+        const sidebar = document.getElementById("cart-sidebar");
+        const overlay = document.getElementById("cart-overlay");
+        if (!sidebar || !overlay) {
+          return;
+        }
+        sidebar.classList.toggle("translate-x-full");
+        overlay.classList.toggle("hidden");
+      }
+
+      // Checkout
+      function checkout() {
+        if (cart.length === 0) {
+          alert("Keranjang masih kosong!");
+          return;
+        }
+
+        // Simpan keranjang ke localStorage untuk digunakan di halaman checkout
+        try {
+          localStorage.setItem("favfood_cart", JSON.stringify(cart));
+        } catch (e) {
+          console.error("Gagal menyimpan keranjang ke localStorage", e);
+        }
+
+        // Arahkan ke halaman checkout
+        window.location.href = "checkout.html";
+      }
+
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

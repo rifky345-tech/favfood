@@ -1,0 +1,142 @@
+function toggleSidebar() {
+  const sidebar = document.getElementById("sidebar");
+  sidebar.classList.toggle("-translate-x-full");
+}
+
+// Close sidebar on mobile when clicking outside
+document.addEventListener("click", function (event) {
+  const sidebar = document.getElementById("sidebar");
+  const isClickInside = sidebar.contains(event.target);
+  const isMenuButton = event.target.closest("button");
+
+  if (!isClickInside && !isMenuButton && window.innerWidth < 1024) {
+    sidebar.classList.add("-translate-x-full");
+  }
+});
+
+// Handle responsive sidebar
+window.addEventListener("resize", function () {
+  const sidebar = document.getElementById("sidebar");
+  if (window.innerWidth >= 1024) {
+    sidebar.classList.remove("-translate-x-full");
+  } else {
+    sidebar.classList.add("-translate-x-full");
+  }
+});
+
+// Initialize sidebar state on load
+if (window.innerWidth < 1024) {
+  document.getElementById("sidebar").classList.add("-translate-x-full");
+}
+
+// Active link handling
+document.querySelectorAll(".sidebar-link").forEach((link) => {
+  link.addEventListener("click", function (e) {
+    e.preventDefault();
+    document.querySelectorAll(".sidebar-link").forEach((l) => {
+      l.classList.remove("active", "bg-white");
+      l.classList.add("text-white");
+      l.querySelector(".sidebar-icon").classList.remove("text-gray-800");
+      l.querySelector(".sidebar-text").classList.remove("text-gray-800");
+    });
+    this.classList.add("active", "bg-white");
+    this.classList.remove("text-white");
+    this.querySelector(".sidebar-icon").classList.add("text-gray-800");
+    this.querySelector(".sidebar-text").classList.add("text-gray-800");
+  });
+});
+// Function to load page content
+async function loadPage(pageName) {
+  const container = document.getElementById("content-container");
+
+  if (!container) {
+    console.error("Content container not found");
+    return;
+  }
+
+  // Show loading state
+  container.innerHTML =
+    '<div class="flex items-center justify-center h-64"><div class="text-primary">Memuat...</div></div>';
+
+  try {
+    const response = await fetch(`pages/${pageName}.html`);
+
+    if (!response.ok) {
+      throw new Error(`Failed to load page: ${pageName}`);
+    }
+
+    const html = await response.text();
+    container.innerHTML = html;
+
+    // Execute any scripts in the loaded content
+    const scripts = container.querySelectorAll("script");
+    scripts.forEach((oldScript) => {
+      const newScript = document.createElement("script");
+      Array.from(oldScript.attributes).forEach((attr) => {
+        newScript.setAttribute(attr.name, attr.value);
+      });
+      newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+      oldScript.parentNode.replaceChild(newScript, oldScript);
+    });
+
+    // Update active sidebar link
+    updateActiveSidebarLink(pageName);
+  } catch (error) {
+    console.error("Error loading page:", error);
+    container.innerHTML = `
+      <div class="flex items-center justify-center h-64">
+        <div class="text-red-500">
+          <i class="fas fa-exclamation-triangle text-2xl mb-2"></i>
+          <p>Gagal memuat halaman: ${pageName}</p>
+        </div>
+      </div>
+    `;
+  }
+}
+
+// Function to update active sidebar link
+function updateActiveSidebarLink(pageName) {
+  document.querySelectorAll(".sidebar-link").forEach((link) => {
+    const linkPage = link.getAttribute("data-page");
+
+    if (linkPage === pageName) {
+      link.classList.add("active", "bg-white");
+      link.classList.remove("text-white");
+      link.querySelector(".sidebar-icon").classList.add("text-gray-800");
+      link.querySelector(".sidebar-text").classList.add("text-gray-800");
+    } else {
+      link.classList.remove("active", "bg-white");
+      link.classList.add("text-white");
+      link.querySelector(".sidebar-icon").classList.remove("text-gray-800");
+      link.querySelector(".sidebar-text").classList.remove("text-gray-800");
+    }
+  });
+}
+
+// Initialize page navigation
+document.addEventListener("DOMContentLoaded", function () {
+  // Add click handlers to sidebar links
+  document.querySelectorAll(".sidebar-link").forEach((link) => {
+    link.addEventListener("click", function (e) {
+      e.preventDefault();
+      const pageName = this.getAttribute("data-page");
+      if (pageName) {
+        loadPage(pageName);
+        // Update URL without reloading
+        window.history.pushState({ page: pageName }, "", `?page=${pageName}`);
+      }
+    });
+  });
+
+  // Handle browser back/forward buttons
+  window.addEventListener("popstate", function (e) {
+    const urlParams = new URLSearchParams(window.location.search);
+    const page = urlParams.get("page") || "dashboard";
+    loadPage(page);
+  });
+
+  // Load initial page from URL or default to dashboard
+  const urlParams = new URLSearchParams(window.location.search);
+  const initialPage = urlParams.get("page") || "dashboard";
+  loadPage(initialPage);
+});

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Admin - FavFood</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/icon.css" />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#05113b",
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-gray-50 min-h-screen flex items-center justify-center px-4 py-6 sm:px-6 sm:py-8">
+    <div class="w-full max-w-md">
+      <!-- Login Card -->
+      <div class="bg-white rounded-xl sm:rounded-2xl shadow-lg sm:shadow-xl p-4 sm:p-6 md:p-8">
+        <!-- Logo/Header -->
+        <div class="text-center mb-6 sm:mb-8">
+          <div
+            class="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-primary rounded-full mb-3 sm:mb-4"
+          >
+            <i class="fas fa-utensils text-white text-lg sm:text-xl md:text-2xl"></i>
+          </div>
+          <h1 class="text-2xl sm:text-3xl md:text-3xl font-bold text-primary mb-2">FavFood Admin</h1>
+          <p class="text-sm sm:text-base text-gray-600 px-2">Masuk ke akun admin Anda</p>
+        </div>
+
+        <!-- Login Form -->
+        <form id="loginForm" class="space-y-4 sm:space-y-5 md:space-y-6">
+          <!-- Username/Email Field -->
+          <div>
+            <label
+              for="username"
+              class="block text-xs sm:text-sm font-medium text-gray-700 mb-2"
+            >
+              <i class="fas fa-user mr-1 sm:mr-2 text-primary text-xs sm:text-sm"></i>Username
+            </label>
+            <div class="relative">
+              <input
+                type="text"
+                id="username"
+                name="username"
+                required
+                class="w-full px-3 py-2.5 sm:px-4 sm:py-3 pl-10 sm:pl-12 text-sm sm:text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition"
+                placeholder="Masukkan username"
+              />
+              <i
+                class="fas fa-user absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm sm:text-base"
+              ></i>
+            </div>
+          </div>
+
+          <!-- Password Field -->
+          <div>
+            <label
+              for="password"
+              class="block text-xs sm:text-sm font-medium text-gray-700 mb-2"
+            >
+              <i class="fas fa-lock mr-1 sm:mr-2 text-primary text-xs sm:text-sm"></i>Password
+            </label>
+            <div class="relative">
+              <input
+                type="password"
+                id="password"
+                name="password"
+                required
+                class="w-full px-3 py-2.5 sm:px-4 sm:py-3 pl-10 sm:pl-12 pr-10 sm:pr-12 text-sm sm:text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition"
+                placeholder="Masukkan password"
+              />
+              <i
+                class="fas fa-lock absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm sm:text-base"
+              ></i>
+              <button
+                type="button"
+                id="togglePassword"
+                class="absolute right-3 sm:right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-primary transition text-sm sm:text-base"
+              >
+                <i class="fas fa-eye" id="eyeIcon"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Remember Me & Forgot Password -->
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0">
+            <label class="flex items-center cursor-pointer">
+              <input
+                type="checkbox"
+                id="remember"
+                name="remember"
+                class="w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary cursor-pointer"
+              />
+              <span class="ml-2 text-xs sm:text-sm text-gray-700">Ingat saya</span>
+            </label>
+            <a href="#" class="text-xs sm:text-sm text-primary hover:underline">
+              Lupa password?
+            </a>
+          </div>
+
+          <!-- Login Button -->
+          <button
+            type="submit"
+            class="w-full bg-primary text-white py-2.5 sm:py-3 rounded-lg font-semibold text-sm sm:text-base hover:bg-opacity-90 transition duration-200 active:scale-95"
+          >
+            Masuk
+          </button>
+        </form>
+
+        <!-- Footer -->
+        <div class="mt-4 sm:mt-6 text-center">
+          <p class="text-xs sm:text-sm text-gray-600">
+            © 2024 FavFood. All rights reserved.
+          </p>
+        </div>
+      </div>
+
+    <!-- Scripts -->
+    <script>
+      // Toggle password visibility
+      const togglePassword = document.getElementById("togglePassword");
+      const passwordInput = document.getElementById("password");
+      const eyeIcon = document.getElementById("eyeIcon");
+
+      togglePassword.addEventListener("click", function () {
+        const type =
+          passwordInput.getAttribute("type") === "password"
+            ? "text"
+            : "password";
+        passwordInput.setAttribute("type", type);
+
+        if (type === "password") {
+          eyeIcon.classList.remove("fa-eye-slash");
+          eyeIcon.classList.add("fa-eye");
+        } else {
+          eyeIcon.classList.remove("fa-eye");
+          eyeIcon.classList.add("fa-eye-slash");
+        }
+      });
+
+      // Handle form submission
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const username = document.getElementById("username").value;
+          const password = document.getElementById("password").value;
+          const remember = document.getElementById("remember").checked;
+
+          // Here you can add your login logic
+          console.log("Login attempt:", { username, password, remember });
+
+          // Example: Redirect to dashboard after successful login
+          // window.location.href = "index.html";
+
+          // For now, just show an alert (replace with actual authentication)
+          alert("Fitur login akan diimplementasikan. Username: " + username);
+        });
+    </script>
+  </body>
+</html>

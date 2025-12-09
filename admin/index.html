@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/icon.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+      body {
+        font-family: "Inter", sans-serif;
+      }
+    </style>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#05113b",
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-white">
+    <!-- Sidebar -->
+    <div
+      class="sidebar fixed inset-y-0 left-0 w-64 bg-primary shadow-lg transform transition-transform duration-300 ease-in-out z-30 flex flex-col"
+      id="sidebar"
+    >
+      <div class="sidebar-header flex items-center justify-between p-6">
+        <h1 class="sidebar-logo text-2xl font-bold text-white">AdminPanel</h1>
+        <button
+          class="sidebar-close lg:hidden text-white"
+          onclick="toggleSidebar()"
+        >
+          <i class="fas fa-times text-xl"></i>
+        </button>
+      </div>
+
+      <nav class="sidebar-nav p-4 space-y-2 flex-1">
+        <a
+          href="#"
+          data-page="dashboard"
+          class="sidebar-link active flex items-center px-4 py-3 text-white bg-white hover:bg-white hover:text-gray-800 rounded-lg transition group"
+        >
+          <i class="sidebar-icon fas fa-home w-5 mr-3 text-gray-800"></i>
+          <span class="sidebar-text text-gray-800">Dashboard</span>
+        </a>
+        <a
+          href="#"
+          data-page="menu"
+          class="sidebar-link flex items-center px-4 py-3 text-white hover:bg-white hover:text-gray-800 rounded-lg transition group"
+        >
+          <i
+            class="sidebar-icon fas fa-solid fa-utensils w-5 mr-3 group-hover:text-gray-800"
+          ></i>
+          <span class="sidebar-text group-hover:text-gray-800">Menu</span>
+        </a>
+        <a
+          href="#"
+          data-page="riwayat"
+          class="sidebar-link flex items-center px-4 py-3 text-white hover:bg-white hover:text-gray-800 rounded-lg transition group"
+        >
+          <i class="sidebar-icon fa-solid fa-clock-rotate-left w-5 mr-3 group-hover:text-gray-800"></i>
+          <span class="sidebar-text group-hover:text-gray-800">Riwayat</span>
+        </a>
+        <a
+          href="#"
+          data-page="analitik"
+          class="sidebar-link flex items-center px-4 py-3 text-white hover:bg-white hover:text-gray-800 rounded-lg transition group"
+        >
+          <i
+            class="sidebar-icon fas fa-chart-bar w-5 mr-3 group-hover:text-gray-800"
+          ></i>
+          <span class="sidebar-text group-hover:text-gray-800">Analitik</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer p-4 border-t border-white border-opacity-20">
+        <div class="flex items-center space-x-3">
+          <img
+            src="https://ui-avatars.com/api/?name=Admin+User&background=1e3a8a&color=fff"
+            alt="Avatar"
+            class="w-10 h-10 rounded-full"
+          />
+          <div>
+            <p class="text-sm font-semibold text-white">Admin User</p>
+            <p class="text-xs text-gray-300">Administrator</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="lg:ml-64">
+      <!-- Top Navbar -->
+      <nav class="bg-white shadow-sm sticky top-0 z-20">
+        <div class="px-4 py-4">
+          <div class="flex items-center justify-between">
+            <button class="lg:hidden" onclick="toggleSidebar()">
+              <i class="fas fa-bars text-xl text-primary"></i>
+            </button>
+
+            <div class="flex-1 max-w-xl mx-4">
+              <div class="relative">
+                <i
+                  class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                ></i>
+                <input
+                  type="text"
+                  placeholder="Cari..."
+                  class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                />
+              </div>
+            </div>
+
+            <div class="flex items-center space-x-4">
+              <button class="relative">
+                <i class="fas fa-bell text-xl text-primary"></i>
+                <span
+                  class="absolute -top-1 -right-1 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center"
+                  >3</span
+                >
+              </button>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Content Container -->
+      <div id="content-container" class="p-6">
+        <!-- Content akan dimuat di sini -->
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/index.js"></script>
+  </body>
+</html>

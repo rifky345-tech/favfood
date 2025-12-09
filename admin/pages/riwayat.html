@@ -1,0 +1,761 @@
+<!-- Header Section -->
+<div class="mb-6 flex items-center justify-between">
+  <div>
+    <h2 class="text-3xl font-bold text-primary">Riwayat Pemesanan</h2>
+    <p class="text-gray-500 mt-1">Kelola dan lihat semua riwayat pemesanan</p>
+  </div>
+  <button
+    onclick="exportRiwayat()"
+    class="bg-primary text-white px-6 py-3 rounded-lg hover:bg-blue-800 transition flex items-center space-x-2"
+  >
+    <i class="fas fa-download"></i>
+    <span>Export Data</span>
+  </button>
+</div>
+
+<!-- Stats Cards -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+  <div class="bg-white rounded-xl shadow-md p-6 border-l-4 border-primary">
+    <div class="flex items-center justify-between">
+      <div>
+        <p class="text-gray-500 text-sm mb-1">Total Pemesanan</p>
+        <h3 class="text-2xl font-bold text-gray-800">1,234</h3>
+        <p class="text-green-500 text-sm mt-2">
+          <i class="fas fa-arrow-up"></i> 12% dari bulan lalu
+        </p>
+      </div>
+      <div class="bg-blue-50 p-4 rounded-lg">
+        <i class="fas fa-shopping-cart text-3xl text-primary"></i>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-xl shadow-md p-6 border-l-4 border-yellow-500">
+    <div class="flex items-center justify-between">
+      <div>
+        <p class="text-gray-500 text-sm mb-1">Menunggu Konfirmasi</p>
+        <h3 class="text-2xl font-bold text-gray-800">23</h3>
+        <p class="text-yellow-500 text-sm mt-2">
+          <i class="fas fa-clock"></i> Perlu ditinjau
+        </p>
+      </div>
+      <div class="bg-yellow-50 p-4 rounded-lg">
+        <i class="fas fa-clock text-3xl text-yellow-500"></i>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-xl shadow-md p-6 border-l-4 border-green-500">
+    <div class="flex items-center justify-between">
+      <div>
+        <p class="text-gray-500 text-sm mb-1">Selesai</p>
+        <h3 class="text-2xl font-bold text-gray-800">1,156</h3>
+        <p class="text-green-500 text-sm mt-2">
+          <i class="fas fa-check-circle"></i> 93.7% sukses
+        </p>
+      </div>
+      <div class="bg-green-50 p-4 rounded-lg">
+        <i class="fas fa-check-circle text-3xl text-green-500"></i>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-xl shadow-md p-6 border-l-4 border-red-500">
+    <div class="flex items-center justify-between">
+      <div>
+        <p class="text-gray-500 text-sm mb-1">Dibatalkan</p>
+        <h3 class="text-2xl font-bold text-gray-800">55</h3>
+        <p class="text-red-500 text-sm mt-2">
+          <i class="fas fa-times-circle"></i> 4.5% dari total
+        </p>
+      </div>
+      <div class="bg-red-50 p-4 rounded-lg">
+        <i class="fas fa-times-circle text-3xl text-red-500"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Filter and Search Section -->
+<div class="bg-white rounded-xl shadow-md p-6 mb-6">
+  <div class="flex flex-col md:flex-row gap-4 items-center">
+    <div class="flex-1 w-full">
+      <div class="relative">
+        <i
+          class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+        ></i>
+        <input
+          type="text"
+          id="searchRiwayat"
+          placeholder="Cari berdasarkan ID pesanan, nama pelanggan..."
+          class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+          onkeyup="filterRiwayat()"
+        />
+      </div>
+    </div>
+    <div class="md:w-48 w-full">
+      <select
+        id="filterStatus"
+        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+        onchange="filterRiwayat()"
+      >
+        <option value="">Semua Status</option>
+        <option value="menunggu">Menunggu Konfirmasi</option>
+        <option value="diproses">Sedang Diproses</option>
+        <option value="dikirim">Sedang Dikirim</option>
+        <option value="selesai">Selesai</option>
+        <option value="dibatalkan">Dibatalkan</option>
+      </select>
+    </div>
+    <div class="md:w-48 w-full">
+      <input
+        type="date"
+        id="filterDate"
+        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+        onchange="filterRiwayat()"
+      />
+    </div>
+  </div>
+</div>
+
+<!-- Riwayat Table -->
+<div class="bg-white rounded-xl shadow-md overflow-hidden">
+  <div class="p-6 border-b bg-primary">
+    <h3 class="text-lg font-semibold text-white">Daftar Riwayat Pemesanan</h3>
+  </div>
+  <div class="overflow-x-auto">
+    <table class="w-full" id="riwayatTable">
+      <thead class="bg-blue-50">
+        <tr>
+          <th
+            class="px-6 py-3 text-left text-xs font-medium text-primary uppercase"
+          >
+            ID Pesanan
+          </th>
+          <th
+            class="px-6 py-3 text-left text-xs font-medium text-primary uppercase"
+          >
+            Pelanggan
+          </th>
+          <th
+            class="px-6 py-3 text-left text-xs font-medium text-primary uppercase"
+          >
+            Item
+          </th>
+          <th
+            class="px-6 py-3 text-left text-xs font-medium text-primary uppercase"
+          >
+            Total
+          </th>
+          <th
+            class="px-6 py-3 text-left text-xs font-medium text-primary uppercase"
+          >
+            Status
+          </th>
+          <th
+            class="px-6 py-3 text-left text-xs font-medium text-primary uppercase"
+          >
+            Tanggal
+          </th>
+          <th
+            class="px-6 py-3 text-left text-xs font-medium text-primary uppercase"
+          >
+            Aksi
+          </th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-200" id="riwayatTableBody">
+        <tr
+          class="hover:bg-blue-50 transition riwayat-item"
+          data-status="selesai"
+          data-date="2024-01-15"
+        >
+          <td class="px-6 py-4">
+            <div class="text-sm font-medium text-gray-800">#ORD-001234</div>
+          </td>
+          <td class="px-6 py-4">
+            <div class="flex items-center">
+              <img
+                src="https://ui-avatars.com/api/?name=Budi+Santoso&background=05113b&color=fff"
+                alt="Budi Santoso"
+                class="w-10 h-10 rounded-full mr-3"
+              />
+              <div>
+                <div class="text-sm font-medium text-gray-800">
+                  Budi Santoso
+                </div>
+                <div class="text-xs text-gray-500">budi@email.com</div>
+              </div>
+            </div>
+          </td>
+          <td class="px-6 py-4">
+            <div class="text-sm text-gray-800">
+              Nasi Goreng Spesial (2x), Es Jeruk (1x)
+            </div>
+            <div class="text-xs text-gray-500">3 item</div>
+          </td>
+          <td class="px-6 py-4">
+            <div class="text-sm font-semibold text-primary">Rp 62,000</div>
+          </td>
+          <td class="px-6 py-4">
+            <span
+              class="px-3 py-1 text-xs font-semibold bg-green-100 text-green-800 rounded-full"
+            >
+              Selesai
+            </span>
+          </td>
+          <td class="px-6 py-4">
+            <div class="text-sm text-gray-800">15 Jan 2024</div>
+            <div class="text-xs text-gray-500">14:30 WIB</div>
+          </td>
+          <td class="px-6 py-4 text-sm">
+            <button
+              onclick="viewDetail('ORD-001234')"
+              class="text-primary hover:text-blue-700 mr-3"
+              title="Lihat Detail"
+            >
+              <i class="fas fa-eye"></i>
+            </button>
+            <button
+              onclick="printInvoice('ORD-001234')"
+              class="text-green-600 hover:text-green-700"
+              title="Cetak Invoice"
+            >
+              <i class="fas fa-print"></i>
+            </button>
+          </td>
+        </tr>
+
+        <tr
+          class="hover:bg-blue-50 transition riwayat-item"
+          data-status="diproses"
+          data-date="2024-01-15"
+        >
+          <td class="px-6 py-4">
+            <div class="text-sm font-medium text-gray-800">#ORD-001233</div>
+          </td>
+          <td class="px-6 py-4">
+            <div class="flex items-center">
+              <img
+                src="https://ui-avatars.com/api/?name=Siti+Nurhaliza&background=05113b&color=fff"
+                alt="Siti Nurhaliza"
+                class="w-10 h-10 rounded-full mr-3"
+              />
+              <div>
+                <div class="text-sm font-medium text-gray-800">
+                  Siti Nurhaliza
+                </div>
+                <div class="text-xs text-gray-500">siti@email.com</div>
+              </div>
+            </div>
+          </td>
+          <td class="px-6 py-4">
+            <div class="text-sm text-gray-800">
+              Mie Ayam Bakso (1x), Es Krim Vanilla (1x)
+            </div>
+            <div class="text-xs text-gray-500">2 item</div>
+          </td>
+          <td class="px-6 py-4">
+            <div class="text-sm font-semibold text-primary">Rp 35,000</div>
+          </td>
+          <td class="px-6 py-4">
+            <span
+              class="px-3 py-1 text-xs font-semibold bg-blue-100 text-blue-800 rounded-full"
+            >
+              Sedang Diproses
+            </span>
+          </td>
+          <td class="px-6 py-4">
+            <div class="text-sm text-gray-800">15 Jan 2024</div>
+            <div class="text-xs text-gray-500">13:15 WIB</div>
+          </td>
+          <td class="px-6 py-4 text-sm">
+            <button
+              onclick="viewDetail('ORD-001233')"
+              class="text-primary hover:text-blue-700 mr-3"
+              title="Lihat Detail"
+            >
+              <i class="fas fa-eye"></i>
+            </button>
+            <button
+              onclick="updateStatus('ORD-001233', 'dikirim')"
+              class="text-yellow-600 hover:text-yellow-700 mr-3"
+              title="Update Status"
+            >
+              <i class="fas fa-edit"></i>
+            </button>
+          </td>
+        </tr>
+
+        <tr
+          class="hover:bg-blue-50 transition riwayat-item"
+          data-status="menunggu"
+          data-date="2024-01-15"
+        >
+          <td class="px-6 py-4">
+            <div class="text-sm font-medium text-gray-800">#ORD-001232</div>
+          </td>
+          <td class="px-6 py-4">
+            <div class="flex items-center">
+              <img
+                src="https://ui-avatars.com/api/?name=Andi+Prasetyo&background=05113b&color=fff"
+                alt="Andi Prasetyo"
+                class="w-10 h-10 rounded-full mr-3"
+              />
+              <div>
+                <div class="text-sm font-medium text-gray-800">
+                  Andi Prasetyo
+                </div>
+                <div class="text-xs text-gray-500">andi@email.com</div>
+              </div>
+            </div>
+          </td>
+          <td class="px-6 py-4">
+            <div class="text-sm text-gray-800">
+              Sate Ayam (1x), Keripik Singkong (2x)
+            </div>
+            <div class="text-xs text-gray-500">3 item</div>
+          </td>
+          <td class="px-6 py-4">
+            <div class="text-sm font-semibold text-primary">Rp 46,000</div>
+          </td>
+          <td class="px-6 py-4">
+            <span
+              class="px-3 py-1 text-xs font-semibold bg-yellow-100 text-yellow-800 rounded-full"
+            >
+              Menunggu Konfirmasi
+            </span>
+          </td>
+          <td class="px-6 py-4">
+            <div class="text-sm text-gray-800">15 Jan 2024</div>
+            <div class="text-xs text-gray-500">12:45 WIB</div>
+          </td>
+          <td class="px-6 py-4 text-sm">
+            <button
+              onclick="viewDetail('ORD-001232')"
+              class="text-primary hover:text-blue-700 mr-3"
+              title="Lihat Detail"
+            >
+              <i class="fas fa-eye"></i>
+            </button>
+            <button
+              onclick="confirmOrder('ORD-001232')"
+              class="text-green-600 hover:text-green-700 mr-3"
+              title="Konfirmasi Pesanan"
+            >
+              <i class="fas fa-check"></i>
+            </button>
+            <button
+              onclick="cancelOrder('ORD-001232')"
+              class="text-red-600 hover:text-red-700"
+              title="Batalkan Pesanan"
+            >
+              <i class="fas fa-times"></i>
+            </button>
+          </td>
+        </tr>
+
+        <tr
+          class="hover:bg-blue-50 transition riwayat-item"
+          data-status="dikirim"
+          data-date="2024-01-14"
+        >
+          <td class="px-6 py-4">
+            <div class="text-sm font-medium text-gray-800">#ORD-001231</div>
+          </td>
+          <td class="px-6 py-4">
+            <div class="flex items-center">
+              <img
+                src="https://ui-avatars.com/api/?name=Rina+Wati&background=05113b&color=fff"
+                alt="Rina Wati"
+                class="w-10 h-10 rounded-full mr-3"
+              />
+              <div>
+                <div class="text-sm font-medium text-gray-800">Rina Wati</div>
+                <div class="text-xs text-gray-500">rina@email.com</div>
+              </div>
+            </div>
+          </td>
+          <td class="px-6 py-4">
+            <div class="text-sm text-gray-800">
+              Nasi Goreng Spesial (1x), Es Jeruk (2x)
+            </div>
+            <div class="text-xs text-gray-500">3 item</div>
+          </td>
+          <td class="px-6 py-4">
+            <div class="text-sm font-semibold text-primary">Rp 49,000</div>
+          </td>
+          <td class="px-6 py-4">
+            <span
+              class="px-3 py-1 text-xs font-semibold bg-purple-100 text-purple-800 rounded-full"
+            >
+              Sedang Dikirim
+            </span>
+          </td>
+          <td class="px-6 py-4">
+            <div class="text-sm text-gray-800">14 Jan 2024</div>
+            <div class="text-xs text-gray-500">16:20 WIB</div>
+          </td>
+          <td class="px-6 py-4 text-sm">
+            <button
+              onclick="viewDetail('ORD-001231')"
+              class="text-primary hover:text-blue-700 mr-3"
+              title="Lihat Detail"
+            >
+              <i class="fas fa-eye"></i>
+            </button>
+            <button
+              onclick="trackOrder('ORD-001231')"
+              class="text-blue-600 hover:text-blue-700"
+              title="Lacak Pengiriman"
+            >
+              <i class="fas fa-truck"></i>
+            </button>
+          </td>
+        </tr>
+
+        <tr
+          class="hover:bg-blue-50 transition riwayat-item"
+          data-status="dibatalkan"
+          data-date="2024-01-14"
+        >
+          <td class="px-6 py-4">
+            <div class="text-sm font-medium text-gray-800">#ORD-001230</div>
+          </td>
+          <td class="px-6 py-4">
+            <div class="flex items-center">
+              <img
+                src="https://ui-avatars.com/api/?name=Joko+Widodo&background=05113b&color=fff"
+                alt="Joko Widodo"
+                class="w-10 h-10 rounded-full mr-3"
+              />
+              <div>
+                <div class="text-sm font-medium text-gray-800">Joko Widodo</div>
+                <div class="text-xs text-gray-500">joko@email.com</div>
+              </div>
+            </div>
+          </td>
+          <td class="px-6 py-4">
+            <div class="text-sm text-gray-800">
+              Mie Ayam Bakso (2x), Es Krim Vanilla (1x)
+            </div>
+            <div class="text-xs text-gray-500">3 item</div>
+          </td>
+          <td class="px-6 py-4">
+            <div class="text-sm font-semibold text-primary">Rp 55,000</div>
+          </td>
+          <td class="px-6 py-4">
+            <span
+              class="px-3 py-1 text-xs font-semibold bg-red-100 text-red-800 rounded-full"
+            >
+              Dibatalkan
+            </span>
+          </td>
+          <td class="px-6 py-4">
+            <div class="text-sm text-gray-800">14 Jan 2024</div>
+            <div class="text-xs text-gray-500">11:30 WIB</div>
+          </td>
+          <td class="px-6 py-4 text-sm">
+            <button
+              onclick="viewDetail('ORD-001230')"
+              class="text-primary hover:text-blue-700 mr-3"
+              title="Lihat Detail"
+            >
+              <i class="fas fa-eye"></i>
+            </button>
+          </td>
+        </tr>
+
+        <tr
+          class="hover:bg-blue-50 transition riwayat-item"
+          data-status="selesai"
+          data-date="2024-01-14"
+        >
+          <td class="px-6 py-4">
+            <div class="text-sm font-medium text-gray-800">#ORD-001229</div>
+          </td>
+          <td class="px-6 py-4">
+            <div class="flex items-center">
+              <img
+                src="https://ui-avatars.com/api/?name=Dewi+Sartika&background=05113b&color=fff"
+                alt="Dewi Sartika"
+                class="w-10 h-10 rounded-full mr-3"
+              />
+              <div>
+                <div class="text-sm font-medium text-gray-800">
+                  Dewi Sartika
+                </div>
+                <div class="text-xs text-gray-500">dewi@email.com</div>
+              </div>
+            </div>
+          </td>
+          <td class="px-6 py-4">
+            <div class="text-sm text-gray-800">
+              Keripik Singkong (5x), Es Jeruk (3x)
+            </div>
+            <div class="text-xs text-gray-500">8 item</div>
+          </td>
+          <td class="px-6 py-4">
+            <div class="text-sm font-semibold text-primary">Rp 69,000</div>
+          </td>
+          <td class="px-6 py-4">
+            <span
+              class="px-3 py-1 text-xs font-semibold bg-green-100 text-green-800 rounded-full"
+            >
+              Selesai
+            </span>
+          </td>
+          <td class="px-6 py-4">
+            <div class="text-sm text-gray-800">14 Jan 2024</div>
+            <div class="text-xs text-gray-500">10:15 WIB</div>
+          </td>
+          <td class="px-6 py-4 text-sm">
+            <button
+              onclick="viewDetail('ORD-001229')"
+              class="text-primary hover:text-blue-700 mr-3"
+              title="Lihat Detail"
+            >
+              <i class="fas fa-eye"></i>
+            </button>
+            <button
+              onclick="printInvoice('ORD-001229')"
+              class="text-green-600 hover:text-green-700"
+              title="Cetak Invoice"
+            >
+              <i class="fas fa-print"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- Pagination -->
+  <div class="p-6 border-t flex items-center justify-between">
+    <div class="text-sm text-gray-500">Menampilkan 1-6 dari 1,234 pesanan</div>
+    <div class="flex space-x-2">
+      <button
+        class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition disabled:opacity-50 disabled:cursor-not-allowed"
+        disabled
+      >
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <button
+        class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-800 transition"
+      >
+        1
+      </button>
+      <button
+        class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition"
+      >
+        2
+      </button>
+      <button
+        class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition"
+      >
+        3
+      </button>
+      <button
+        class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition"
+      >
+        <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Detail Modal -->
+<div
+  id="detailModal"
+  class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50"
+  onclick="closeDetailModal(event)"
+>
+  <div
+    class="bg-white rounded-xl shadow-2xl max-w-3xl w-full mx-4 max-h-[90vh] overflow-y-auto"
+    onclick="event.stopPropagation()"
+  >
+    <div class="p-6 border-b bg-primary">
+      <div class="flex items-center justify-between">
+        <h3 class="text-xl font-semibold text-white">Detail Pesanan</h3>
+        <button
+          onclick="closeDetailModal()"
+          class="text-white hover:text-gray-200"
+        >
+          <i class="fas fa-times text-xl"></i>
+        </button>
+      </div>
+    </div>
+    <div class="p-6" id="detailContent">
+      <!-- Detail content will be loaded here -->
+    </div>
+  </div>
+</div>
+
+<script>
+  // Filter riwayat function
+  function filterRiwayat() {
+    const searchTerm = document
+      .getElementById("searchRiwayat")
+      .value.toLowerCase();
+    const statusFilter = document.getElementById("filterStatus").value;
+    const dateFilter = document.getElementById("filterDate").value;
+    const riwayatItems = document.querySelectorAll(".riwayat-item");
+
+    riwayatItems.forEach((item) => {
+      const orderId = item
+        .querySelector("td:first-child .text-sm")
+        .textContent.toLowerCase();
+      const customerName = item
+        .querySelector("td:nth-child(2) .text-sm")
+        .textContent.toLowerCase();
+      const status = item.getAttribute("data-status");
+      const date = item.getAttribute("data-date");
+
+      const matchesSearch =
+        orderId.includes(searchTerm) || customerName.includes(searchTerm);
+      const matchesStatus = !statusFilter || status === statusFilter;
+      const matchesDate = !dateFilter || date === dateFilter;
+
+      if (matchesSearch && matchesStatus && matchesDate) {
+        item.style.display = "";
+      } else {
+        item.style.display = "none";
+      }
+    });
+  }
+
+  // View detail function
+  function viewDetail(orderId) {
+    // In a real application, you would fetch order details by ID
+    document.getElementById("detailModal").classList.remove("hidden");
+    document.getElementById("detailModal").classList.add("flex");
+
+    // Example detail content
+    document.getElementById("detailContent").innerHTML = `
+      <div class="space-y-6">
+        <div>
+          <h4 class="text-lg font-semibold text-gray-800 mb-4">Informasi Pesanan</h4>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <p class="text-sm text-gray-500">ID Pesanan</p>
+              <p class="text-sm font-semibold text-gray-800">${orderId}</p>
+            </div>
+            <div>
+              <p class="text-sm text-gray-500">Tanggal</p>
+              <p class="text-sm font-semibold text-gray-800">15 Jan 2024, 14:30 WIB</p>
+            </div>
+            <div>
+              <p class="text-sm text-gray-500">Status</p>
+              <span class="px-3 py-1 text-xs font-semibold bg-green-100 text-green-800 rounded-full">Selesai</span>
+            </div>
+            <div>
+              <p class="text-sm text-gray-500">Total</p>
+              <p class="text-sm font-semibold text-primary">Rp 62,000</p>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-lg font-semibold text-gray-800 mb-4">Informasi Pelanggan</h4>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <p class="text-sm text-gray-500">Nama</p>
+              <p class="text-sm font-semibold text-gray-800">Budi Santoso</p>
+            </div>
+            <div>
+              <p class="text-sm text-gray-500">Email</p>
+              <p class="text-sm font-semibold text-gray-800">budi@email.com</p>
+            </div>
+            <div>
+              <p class="text-sm text-gray-500">Telepon</p>
+              <p class="text-sm font-semibold text-gray-800">081234567890</p>
+            </div>
+            <div>
+              <p class="text-sm text-gray-500">Alamat</p>
+              <p class="text-sm font-semibold text-gray-800">Jl. Contoh No. 123, Jakarta</p>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-lg font-semibold text-gray-800 mb-4">Item Pesanan</h4>
+          <div class="border rounded-lg overflow-hidden">
+            <table class="w-full">
+              <thead class="bg-gray-50">
+                <tr>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-700">Item</th>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-700">Jumlah</th>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-700">Harga</th>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-700">Subtotal</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y">
+                <tr>
+                  <td class="px-4 py-3 text-sm text-gray-800">Nasi Goreng Spesial</td>
+                  <td class="px-4 py-3 text-sm text-gray-600">2</td>
+                  <td class="px-4 py-3 text-sm text-gray-600">Rp 25,000</td>
+                  <td class="px-4 py-3 text-sm font-semibold text-gray-800">Rp 50,000</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 text-sm text-gray-800">Es Jeruk</td>
+                  <td class="px-4 py-3 text-sm text-gray-600">1</td>
+                  <td class="px-4 py-3 text-sm text-gray-600">Rp 12,000</td>
+                  <td class="px-4 py-3 text-sm font-semibold text-gray-800">Rp 12,000</td>
+                </tr>
+              </tbody>
+              <tfoot class="bg-gray-50">
+                <tr>
+                  <td colspan="3" class="px-4 py-3 text-sm font-semibold text-gray-800 text-right">Total</td>
+                  <td class="px-4 py-3 text-sm font-semibold text-primary">Rp 62,000</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  function closeDetailModal(event) {
+    if (!event || event.target.id === "detailModal") {
+      document.getElementById("detailModal").classList.add("hidden");
+      document.getElementById("detailModal").classList.remove("flex");
+    }
+  }
+
+  // Other action functions
+  function confirmOrder(orderId) {
+    if (confirm(`Apakah Anda yakin ingin mengkonfirmasi pesanan ${orderId}?`)) {
+      // In a real application, you would update the order status via API
+      alert(`Pesanan ${orderId} berhasil dikonfirmasi!`);
+      // Reload or update the table
+    }
+  }
+
+  function cancelOrder(orderId) {
+    if (confirm(`Apakah Anda yakin ingin membatalkan pesanan ${orderId}?`)) {
+      // In a real application, you would cancel the order via API
+      alert(`Pesanan ${orderId} berhasil dibatalkan!`);
+      // Reload or update the table
+    }
+  }
+
+  function updateStatus(orderId, newStatus) {
+    // In a real application, you would update the order status via API
+    alert(`Status pesanan ${orderId} akan diubah menjadi ${newStatus}`);
+  }
+
+  function trackOrder(orderId) {
+    // In a real application, you would show tracking information
+    alert(`Lacak pengiriman untuk pesanan ${orderId}`);
+  }
+
+  function printInvoice(orderId) {
+    // In a real application, you would generate and print invoice
+    window.print();
+  }
+
+  function exportRiwayat() {
+    // In a real application, you would export data to CSV/Excel
+    alert("Data riwayat akan diekspor...");
+  }
+</script>
