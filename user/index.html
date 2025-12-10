@@ -54,7 +54,7 @@
               >
                 <button
                   onclick="scrollToCategory('all')"
-                  class="category-btn active px-3 py-1 ml-2 text-sm text-white border-b-4 border-white"
+                  class="category-btn active px-3 py-1 ml-2 text-sm text-white border-b-2 border-white"
                 >
                   Semua
                 </button>
@@ -111,7 +111,7 @@
                 class="bg-white text-black px-3 py-3 rounded-lg text-sm font-semibold hover:bg-gray-100 transition flex items-center space-x-1"
               >
                 <span>CHECK OUT</span>
-                <span id="footer-checkout-count" class="text-primary">
+                <span id="footer-checkout-count" class="text-black">
                   (0)
                 </span>
               </button>
@@ -334,13 +334,13 @@
           btn.classList.remove(
             "active",
             "text-primary",
-            "border-b-4",
+            "border-b-2",
             "border-primary",
             "border-white"
           );
           btn.classList.add("text-white");
         });
-        event.target.classList.add("active", "border-b-4", "border-white");
+        event.target.classList.add("active", "border-b-2", "border-white");
 
         if (category === "all") {
           // Scroll to top of menu section
