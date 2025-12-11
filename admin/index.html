@@ -28,6 +28,13 @@
     </script>
   </head>
   <body class="bg-white">
+    <!-- Backdrop Overlay for Mobile -->
+    <div
+      id="sidebarBackdrop"
+      class="fixed inset-0 bg-black bg-opacity-50 z-[25] hidden lg:hidden transition-opacity duration-300"
+      onclick="toggleSidebar()"
+    ></div>
+
     <!-- Sidebar -->
     <div
       class="sidebar fixed inset-y-0 left-0 w-64 bg-primary shadow-lg transform transition-transform duration-300 ease-in-out z-30 flex flex-col"

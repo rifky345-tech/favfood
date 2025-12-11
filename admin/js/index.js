@@ -1,32 +1,76 @@
 function toggleSidebar() {
   const sidebar = document.getElementById("sidebar");
-  sidebar.classList.toggle("-translate-x-full");
+  const backdrop = document.getElementById("sidebarBackdrop");
+  const isOpen = !sidebar.classList.contains("-translate-x-full");
+  
+  if (isOpen) {
+    // Close sidebar
+    sidebar.classList.add("-translate-x-full");
+    if (backdrop) {
+      backdrop.classList.add("hidden");
+    }
+  } else {
+    // Open sidebar
+    sidebar.classList.remove("-translate-x-full");
+    if (backdrop && window.innerWidth < 1024) {
+      backdrop.classList.remove("hidden");
+    }
+  }
+}
+
+// Function to close sidebar on mobile
+function closeSidebarMobile() {
+  if (window.innerWidth < 1024) {
+    const sidebar = document.getElementById("sidebar");
+    const backdrop = document.getElementById("sidebarBackdrop");
+    sidebar.classList.add("-translate-x-full");
+    if (backdrop) {
+      backdrop.classList.add("hidden");
+    }
+  }
 }
 
 // Close sidebar on mobile when clicking outside
 document.addEventListener("click", function (event) {
   const sidebar = document.getElementById("sidebar");
+  const backdrop = document.getElementById("sidebarBackdrop");
   const isClickInside = sidebar.contains(event.target);
   const isMenuButton = event.target.closest("button");
+  const isBackdrop = event.target.id === "sidebarBackdrop";
 
-  if (!isClickInside && !isMenuButton && window.innerWidth < 1024) {
+  if ((!isClickInside && !isMenuButton && !isBackdrop) && window.innerWidth < 1024) {
     sidebar.classList.add("-translate-x-full");
+    if (backdrop) {
+      backdrop.classList.add("hidden");
+    }
   }
 });
 
 // Handle responsive sidebar
 window.addEventListener("resize", function () {
   const sidebar = document.getElementById("sidebar");
+  const backdrop = document.getElementById("sidebarBackdrop");
   if (window.innerWidth >= 1024) {
     sidebar.classList.remove("-translate-x-full");
+    if (backdrop) {
+      backdrop.classList.add("hidden");
+    }
   } else {
-    sidebar.classList.add("-translate-x-full");
+    // Only hide backdrop if sidebar is closed
+    if (sidebar.classList.contains("-translate-x-full") && backdrop) {
+      backdrop.classList.add("hidden");
+    }
   }
 });
 
 // Initialize sidebar state on load
 if (window.innerWidth < 1024) {
-  document.getElementById("sidebar").classList.add("-translate-x-full");
+  const sidebar = document.getElementById("sidebar");
+  const backdrop = document.getElementById("sidebarBackdrop");
+  sidebar.classList.add("-translate-x-full");
+  if (backdrop) {
+    backdrop.classList.add("hidden");
+  }
 }
 
 // Active link handling
@@ -81,6 +125,9 @@ async function loadPage(pageName) {
 
     // Update active sidebar link
     updateActiveSidebarLink(pageName);
+    
+    // Close sidebar on mobile after page loads
+    closeSidebarMobile();
   } catch (error) {
     console.error("Error loading page:", error);
     container.innerHTML = `
@@ -121,6 +168,8 @@ document.addEventListener("DOMContentLoaded", function () {
       e.preventDefault();
       const pageName = this.getAttribute("data-page");
       if (pageName) {
+        // Close sidebar on mobile before loading page
+        closeSidebarMobile();
         loadPage(pageName);
         // Update URL without reloading
         window.history.pushState({ page: pageName }, "", `?page=${pageName}`);
