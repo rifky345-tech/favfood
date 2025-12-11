@@ -1,12 +1,16 @@
 <!-- Header Section -->
-<div class="mb-6 flex items-center justify-between">
+<div
+  class="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"
+>
   <div>
-    <h2 class="text-3xl font-bold text-primary">Manajemen Menu</h2>
-    <p class="text-gray-500 mt-1">Kelola menu makanan dan minuman</p>
+    <h2 class="text-2xl sm:text-3xl font-bold text-primary">Manajemen Menu</h2>
+    <p class="text-gray-500 mt-1 text-sm sm:text-base">
+      Kelola menu makanan dan minuman
+    </p>
   </div>
   <button
     onclick="openAddMenuModal()"
-    class="bg-primary text-white px-6 py-3 rounded-lg hover:bg-blue-800 transition flex items-center space-x-2"
+    class="bg-primary text-white px-4 py-3 sm:px-6 rounded-lg flex items-center justify-center space-x-2 w-full sm:w-auto"
   >
     <i class="fas fa-plus"></i>
     <span>Tambah Menu</span>
@@ -125,415 +129,7 @@
 <div
   id="menuGridView"
   class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 md:gap-6 mb-6"
->
-  <div
-    class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 menu-item flex flex-col"
-    data-category="makanan"
-    data-status="aktif"
-    data-id="1"
-  >
-    <div class="relative">
-      <img
-        src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&h=250&fit=crop"
-        alt="Nasi Goreng"
-        class="w-full h-40 object-cover"
-      />
-      <div class="absolute top-2 right-2 sm:top-3 sm:right-3">
-        <span
-          class="px-2 py-0.5 sm:px-3 sm:py-1 text-xs font-semibold bg-green-100 text-green-800 rounded-full"
-        >
-          Aktif
-        </span>
-      </div>
-    </div>
-    <div class="p-3 sm:p-4 md:p-5 flex flex-col flex-1">
-      <div class="flex items-start justify-between mb-2">
-        <div class="flex-1">
-          <h3
-            class="text-sm sm:text-base md:text-lg font-bold text-gray-800 mb-1"
-          >
-            Nasi Goreng Spesial
-          </h3>
-        </div>
-      </div>
-      <div class="flex items-center justify-start mb-2 sm:mb-3">
-        <span class="text-sm sm:text-base md:text-lg font-bold text-primary"
-          >Rp 25,000</span
-        >
-      </div>
-      <div class="flex items-center justify-between mb-2 sm:mb-4">
-        <div class="flex items-center text-xs sm:text-sm text-gray-600">
-          <i class="fas fa-box mr-1 sm:mr-2"></i>
-          <span>Stok: <strong>45</strong></span>
-        </div>
-      </div>
-      <div class="flex gap-1 sm:gap-2 mt-auto">
-        <button
-          onclick="editMenu(1)"
-          class="flex-1 bg-primary text-white px-2 py-1.5 sm:px-3 sm:py-2 rounded-lg hover:bg-blue-800 transition text-xs sm:text-sm"
-          title="Edit"
-        >
-          <i class="fas fa-edit sm:mr-1"></i>
-          <span class="hidden sm:inline">Edit</span>
-        </button>
-        <button
-          onclick="viewMenu(1)"
-          class="px-2 py-1.5 sm:px-3 sm:py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition text-xs sm:text-sm"
-          title="Lihat"
-        >
-          <i class="fas fa-eye"></i>
-        </button>
-        <button
-          onclick="deleteMenu(1)"
-          class="px-2 py-1.5 sm:px-3 sm:py-2 border border-red-300 text-red-600 rounded-lg hover:bg-red-50 transition text-xs sm:text-sm"
-          title="Hapus"
-        >
-          <i class="fas fa-trash"></i>
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <div
-    class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 menu-item flex flex-col"
-    data-category="minuman"
-    data-status="aktif"
-    data-id="2"
-  >
-    <div class="relative">
-      <img
-        src="https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400&h=250&fit=crop"
-        alt="Es Jeruk"
-        class="w-full h-40 object-cover"
-      />
-      <div class="absolute top-2 right-2 sm:top-3 sm:right-3">
-        <span
-          class="px-2 py-0.5 sm:px-3 sm:py-1 text-xs font-semibold bg-green-100 text-green-800 rounded-full"
-        >
-          Aktif
-        </span>
-      </div>
-    </div>
-    <div class="p-3 sm:p-4 md:p-5 flex flex-col flex-1">
-      <div class="flex items-start justify-between mb-2">
-        <div class="flex-1">
-          <h3
-            class="text-sm sm:text-base md:text-lg font-bold text-gray-800 mb-1"
-          >
-            Es Jeruk Manis
-          </h3>
-        </div>
-      </div>
-      <div class="flex items-center justify-start mb-2 sm:mb-3">
-        <span class="text-sm sm:text-base md:text-lg font-bold text-primary"
-          >Rp 12,000</span
-        >
-      </div>
-      <div class="flex items-center justify-between mb-2 sm:mb-4">
-        <div class="flex items-center text-xs sm:text-sm text-gray-600">
-          <i class="fas fa-box mr-1 sm:mr-2"></i>
-          <span>Stok: <strong>78</strong></span>
-        </div>
-      </div>
-      <div class="flex gap-1 sm:gap-2 mt-auto">
-        <button
-          onclick="editMenu(2)"
-          class="flex-1 bg-primary text-white px-2 py-1.5 sm:px-3 sm:py-2 rounded-lg hover:bg-blue-800 transition text-xs sm:text-sm"
-          title="Edit"
-        >
-          <i class="fas fa-edit sm:mr-1"></i>
-          <span class="hidden sm:inline">Edit</span>
-        </button>
-        <button
-          onclick="viewMenu(2)"
-          class="px-2 py-1.5 sm:px-3 sm:py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition text-xs sm:text-sm"
-          title="Lihat"
-        >
-          <i class="fas fa-eye"></i>
-        </button>
-        <button
-          onclick="deleteMenu(2)"
-          class="px-2 py-1.5 sm:px-3 sm:py-2 border border-red-300 text-red-600 rounded-lg hover:bg-red-50 transition text-xs sm:text-sm"
-          title="Hapus"
-        >
-          <i class="fas fa-trash"></i>
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <div
-    class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 menu-item flex flex-col"
-    data-category="makanan"
-    data-status="habis"
-    data-id="3"
-  >
-    <div class="relative">
-      <img
-        src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=400&h=250&fit=crop"
-        alt="Mie Ayam"
-        class="w-full h-40 object-cover opacity-75"
-      />
-      <div class="absolute top-2 right-2 sm:top-3 sm:right-3">
-        <span
-          class="px-2 py-0.5 sm:px-3 sm:py-1 text-xs font-semibold bg-yellow-100 text-yellow-800 rounded-full"
-        >
-          Habis
-        </span>
-      </div>
-    </div>
-    <div class="p-3 sm:p-4 md:p-5 flex flex-col flex-1">
-      <div class="flex items-start justify-between mb-2">
-        <div class="flex-1">
-          <h3
-            class="text-sm sm:text-base md:text-lg font-bold text-gray-800 mb-1"
-          >
-            Mie Ayam Bakso
-          </h3>
-        </div>
-      </div>
-      <div class="flex items-center justify-start mb-2 sm:mb-3">
-        <span class="text-sm sm:text-base md:text-lg font-bold text-primary"
-          >Rp 20,000</span
-        >
-      </div>
-      <div class="flex items-center justify-between mb-2 sm:mb-4">
-        <div class="flex items-center text-xs sm:text-sm text-gray-600">
-          <i class="fas fa-box mr-1 sm:mr-2"></i>
-          <span>Stok: <strong class="text-red-600">0</strong></span>
-        </div>
-      </div>
-      <div class="flex gap-1 sm:gap-2 mt-auto">
-        <button
-          onclick="editMenu(3)"
-          class="flex-1 bg-primary text-white px-2 py-1.5 sm:px-3 sm:py-2 rounded-lg hover:bg-blue-800 transition text-xs sm:text-sm"
-          title="Edit"
-        >
-          <i class="fas fa-edit sm:mr-1"></i>
-          <span class="hidden sm:inline">Edit</span>
-        </button>
-        <button
-          onclick="viewMenu(3)"
-          class="px-2 py-1.5 sm:px-3 sm:py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition text-xs sm:text-sm"
-          title="Lihat"
-        >
-          <i class="fas fa-eye"></i>
-        </button>
-        <button
-          onclick="deleteMenu(3)"
-          class="px-2 py-1.5 sm:px-3 sm:py-2 border border-red-300 text-red-600 rounded-lg hover:bg-red-50 transition text-xs sm:text-sm"
-          title="Hapus"
-        >
-          <i class="fas fa-trash"></i>
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <div
-    class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 menu-item flex flex-col"
-    data-category="snack"
-    data-status="aktif"
-    data-id="4"
-  >
-    <div class="relative">
-      <img
-        src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=400&h=250&fit=crop"
-        alt="Keripik"
-        class="w-full h-40 object-cover"
-      />
-      <div class="absolute top-2 right-2 sm:top-3 sm:right-3">
-        <span
-          class="px-2 py-0.5 sm:px-3 sm:py-1 text-xs font-semibold bg-green-100 text-green-800 rounded-full"
-        >
-          Aktif
-        </span>
-      </div>
-    </div>
-    <div class="p-3 sm:p-4 md:p-5 flex flex-col flex-1">
-      <div class="flex items-start justify-between mb-2">
-        <div class="flex-1">
-          <h3
-            class="text-sm sm:text-base md:text-lg font-bold text-gray-800 mb-1"
-          >
-            Keripik Singkong
-          </h3>
-        </div>
-      </div>
-      <div class="flex items-center justify-start mb-2 sm:mb-3">
-        <span class="text-sm sm:text-base md:text-lg font-bold text-primary"
-          >Rp 8,000</span
-        >
-      </div>
-      <div class="flex items-center justify-between mb-2 sm:mb-4">
-        <div class="flex items-center text-xs sm:text-sm text-gray-600">
-          <i class="fas fa-box mr-1 sm:mr-2"></i>
-          <span>Stok: <strong>120</strong></span>
-        </div>
-      </div>
-      <div class="flex gap-1 sm:gap-2 mt-auto">
-        <button
-          onclick="editMenu(4)"
-          class="flex-1 bg-primary text-white px-2 py-1.5 sm:px-3 sm:py-2 rounded-lg hover:bg-blue-800 transition text-xs sm:text-sm"
-          title="Edit"
-        >
-          <i class="fas fa-edit sm:mr-1"></i>
-          <span class="hidden sm:inline">Edit</span>
-        </button>
-        <button
-          onclick="viewMenu(4)"
-          class="px-2 py-1.5 sm:px-3 sm:py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition text-xs sm:text-sm"
-          title="Lihat"
-        >
-          <i class="fas fa-eye"></i>
-        </button>
-        <button
-          onclick="deleteMenu(4)"
-          class="px-2 py-1.5 sm:px-3 sm:py-2 border border-red-300 text-red-600 rounded-lg hover:bg-red-50 transition text-xs sm:text-sm"
-          title="Hapus"
-        >
-          <i class="fas fa-trash"></i>
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <div
-    class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 menu-item flex flex-col"
-    data-category="dessert"
-    data-status="aktif"
-    data-id="5"
-  >
-    <div class="relative">
-      <img
-        src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400&h=250&fit=crop"
-        alt="Es Krim"
-        class="w-full h-40 object-cover"
-      />
-      <div class="absolute top-2 right-2 sm:top-3 sm:right-3">
-        <span
-          class="px-2 py-0.5 sm:px-3 sm:py-1 text-xs font-semibold bg-green-100 text-green-800 rounded-full"
-        >
-          Aktif
-        </span>
-      </div>
-    </div>
-    <div class="p-3 sm:p-4 md:p-5 flex flex-col flex-1">
-      <div class="flex items-start justify-between mb-2">
-        <div class="flex-1">
-          <h3
-            class="text-sm sm:text-base md:text-lg font-bold text-gray-800 mb-1"
-          >
-            Es Krim Vanilla
-          </h3>
-        </div>
-      </div>
-      <div class="flex items-center justify-start mb-2 sm:mb-3">
-        <span class="text-sm sm:text-base md:text-lg font-bold text-primary"
-          >Rp 15,000</span
-        >
-      </div>
-      <div class="flex items-center justify-between mb-2 sm:mb-4">
-        <div class="flex items-center text-xs sm:text-sm text-gray-600">
-          <i class="fas fa-box mr-1 sm:mr-2"></i>
-          <span>Stok: <strong>32</strong></span>
-        </div>
-      </div>
-      <div class="flex gap-1 sm:gap-2 mt-auto">
-        <button
-          onclick="editMenu(5)"
-          class="flex-1 bg-primary text-white px-2 py-1.5 sm:px-3 sm:py-2 rounded-lg hover:bg-blue-800 transition text-xs sm:text-sm"
-          title="Edit"
-        >
-          <i class="fas fa-edit sm:mr-1"></i>
-          <span class="hidden sm:inline">Edit</span>
-        </button>
-        <button
-          onclick="viewMenu(5)"
-          class="px-2 py-1.5 sm:px-3 sm:py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition text-xs sm:text-sm"
-          title="Lihat"
-        >
-          <i class="fas fa-eye"></i>
-        </button>
-        <button
-          onclick="deleteMenu(5)"
-          class="px-2 py-1.5 sm:px-3 sm:py-2 border border-red-300 text-red-600 rounded-lg hover:bg-red-50 transition text-xs sm:text-sm"
-          title="Hapus"
-        >
-          <i class="fas fa-trash"></i>
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <div
-    class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 menu-item flex flex-col"
-    data-category="makanan"
-    data-status="nonaktif"
-    data-id="6"
-  >
-    <div class="relative">
-      <img
-        src="https://images.unsplash.com/photo-1563379091339-03246963d3c9?w=400&h=250&fit=crop"
-        alt="Sate"
-        class="w-full h-40 object-cover opacity-50"
-      />
-      <div class="absolute top-2 right-2 sm:top-3 sm:right-3">
-        <span
-          class="px-2 py-0.5 sm:px-3 sm:py-1 text-xs font-semibold bg-red-100 text-red-800 rounded-full"
-        >
-          Nonaktif
-        </span>
-      </div>
-    </div>
-    <div class="p-3 sm:p-4 md:p-5 flex flex-col flex-1">
-      <div class="flex items-start justify-between mb-2">
-        <div class="flex-1">
-          <h3
-            class="text-sm sm:text-base md:text-lg font-bold text-gray-800 mb-1"
-          >
-            Sate Ayam
-          </h3>
-        </div>
-      </div>
-      <div class="flex items-center justify-start mb-2 sm:mb-3">
-        <span class="text-sm sm:text-base md:text-lg font-bold text-primary"
-          >Rp 30,000</span
-        >
-      </div>
-      <div class="flex items-center justify-between mb-2 sm:mb-4">
-        <div class="flex items-center text-xs sm:text-sm text-gray-600">
-          <i class="fas fa-box mr-1 sm:mr-2"></i>
-          <span>Stok: <strong>0</strong></span>
-        </div>
-      </div>
-      <div class="flex gap-1 sm:gap-2 mt-auto">
-        <button
-          onclick="editMenu(6)"
-          class="flex-1 bg-primary text-white px-2 py-1.5 sm:px-3 sm:py-2 rounded-lg hover:bg-blue-800 transition text-xs sm:text-sm"
-          title="Edit"
-        >
-          <i class="fas fa-edit sm:mr-1"></i>
-          <span class="hidden sm:inline">Edit</span>
-        </button>
-        <button
-          onclick="viewMenu(6)"
-          class="px-2 py-1.5 sm:px-3 sm:py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition text-xs sm:text-sm"
-          title="Lihat"
-        >
-          <i class="fas fa-eye"></i>
-        </button>
-        <button
-          onclick="deleteMenu(6)"
-          class="px-2 py-1.5 sm:px-3 sm:py-2 border border-red-300 text-red-600 rounded-lg hover:bg-red-50 transition text-xs sm:text-sm"
-          title="Hapus"
-        >
-          <i class="fas fa-trash"></i>
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
+></div>
 
 <!-- Menu List View -->
 <div id="menuListView" class="hidden">
@@ -584,372 +180,7 @@
             </th>
           </tr>
         </thead>
-        <tbody class="divide-y divide-gray-200" id="menuTableBody">
-          <tr
-            class="hover:bg-blue-50 transition menu-item"
-            data-category="makanan"
-            data-status="aktif"
-            data-id="1"
-          >
-            <td class="px-6 py-4">
-              <img
-                src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=100&h=100&fit=crop"
-                alt="Nasi Goreng"
-                class="w-16 h-16 object-cover rounded-lg"
-              />
-            </td>
-            <td class="px-6 py-4">
-              <div class="text-sm font-medium text-gray-800">
-                Nasi Goreng Spesial
-              </div>
-              <div class="text-xs text-gray-500">
-                Nasi goreng dengan telur dan ayam
-              </div>
-            </td>
-            <td class="px-6 py-4">
-              <span
-                class="px-3 py-1 text-xs font-semibold bg-blue-100 text-blue-800 rounded-full"
-              >
-                Makanan
-              </span>
-            </td>
-            <td class="px-6 py-4 text-sm font-semibold text-primary">
-              Rp 25,000
-            </td>
-            <td class="px-6 py-4 text-sm text-gray-600">45</td>
-            <td class="px-6 py-4">
-              <span
-                class="px-3 py-1 text-xs font-semibold bg-green-100 text-green-800 rounded-full"
-                >Aktif</span
-              >
-            </td>
-            <td class="px-6 py-4 text-sm">
-              <button
-                onclick="editMenu(1)"
-                class="text-primary hover:text-blue-700 mr-3"
-                title="Edit"
-              >
-                <i class="fas fa-edit"></i>
-              </button>
-              <button
-                onclick="viewMenu(1)"
-                class="text-green-600 hover:text-green-700 mr-3"
-                title="Lihat Detail"
-              >
-                <i class="fas fa-eye"></i>
-              </button>
-              <button
-                onclick="deleteMenu(1)"
-                class="text-red-600 hover:text-red-700"
-                title="Hapus"
-              >
-                <i class="fas fa-trash"></i>
-              </button>
-            </td>
-          </tr>
-          <tr
-            class="hover:bg-blue-50 transition menu-item"
-            data-category="minuman"
-            data-status="aktif"
-            data-id="2"
-          >
-            <td class="px-6 py-4">
-              <img
-                src="https://images.unsplash.com/photo-1544145945-f90425340c7e?w=100&h=100&fit=crop"
-                alt="Es Jeruk"
-                class="w-16 h-16 object-cover rounded-lg"
-              />
-            </td>
-            <td class="px-6 py-4">
-              <div class="text-sm font-medium text-gray-800">
-                Es Jeruk Manis
-              </div>
-              <div class="text-xs text-gray-500">Minuman segar jeruk peras</div>
-            </td>
-            <td class="px-6 py-4">
-              <span
-                class="px-3 py-1 text-xs font-semibold bg-green-100 text-green-800 rounded-full"
-              >
-                Minuman
-              </span>
-            </td>
-            <td class="px-6 py-4 text-sm font-semibold text-primary">
-              Rp 12,000
-            </td>
-            <td class="px-6 py-4 text-sm text-gray-600">78</td>
-            <td class="px-6 py-4">
-              <span
-                class="px-3 py-1 text-xs font-semibold bg-green-100 text-green-800 rounded-full"
-                >Aktif</span
-              >
-            </td>
-            <td class="px-6 py-4 text-sm">
-              <button
-                onclick="editMenu(2)"
-                class="text-primary hover:text-blue-700 mr-3"
-                title="Edit"
-              >
-                <i class="fas fa-edit"></i>
-              </button>
-              <button
-                onclick="viewMenu(2)"
-                class="text-green-600 hover:text-green-700 mr-3"
-                title="Lihat Detail"
-              >
-                <i class="fas fa-eye"></i>
-              </button>
-              <button
-                onclick="deleteMenu(2)"
-                class="text-red-600 hover:text-red-700"
-                title="Hapus"
-              >
-                <i class="fas fa-trash"></i>
-              </button>
-            </td>
-          </tr>
-          <tr
-            class="hover:bg-blue-50 transition menu-item"
-            data-category="makanan"
-            data-status="habis"
-            data-id="3"
-          >
-            <td class="px-6 py-4">
-              <img
-                src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=100&h=100&fit=crop"
-                alt="Mie Ayam"
-                class="w-16 h-16 object-cover rounded-lg"
-              />
-            </td>
-            <td class="px-6 py-4">
-              <div class="text-sm font-medium text-gray-800">
-                Mie Ayam Bakso
-              </div>
-              <div class="text-xs text-gray-500">
-                Mie ayam dengan bakso dan pangsit
-              </div>
-            </td>
-            <td class="px-6 py-4">
-              <span
-                class="px-3 py-1 text-xs font-semibold bg-blue-100 text-blue-800 rounded-full"
-              >
-                Makanan
-              </span>
-            </td>
-            <td class="px-6 py-4 text-sm font-semibold text-primary">
-              Rp 20,000
-            </td>
-            <td class="px-6 py-4 text-sm text-gray-600">0</td>
-            <td class="px-6 py-4">
-              <span
-                class="px-3 py-1 text-xs font-semibold bg-yellow-100 text-yellow-800 rounded-full"
-                >Habis</span
-              >
-            </td>
-            <td class="px-6 py-4 text-sm">
-              <button
-                onclick="editMenu(3)"
-                class="text-primary hover:text-blue-700 mr-3"
-                title="Edit"
-              >
-                <i class="fas fa-edit"></i>
-              </button>
-              <button
-                onclick="viewMenu(3)"
-                class="text-green-600 hover:text-green-700 mr-3"
-                title="Lihat Detail"
-              >
-                <i class="fas fa-eye"></i>
-              </button>
-              <button
-                onclick="deleteMenu(3)"
-                class="text-red-600 hover:text-red-700"
-                title="Hapus"
-              >
-                <i class="fas fa-trash"></i>
-              </button>
-            </td>
-          </tr>
-          <tr
-            class="hover:bg-blue-50 transition menu-item"
-            data-category="snack"
-            data-status="aktif"
-            data-id="4"
-          >
-            <td class="px-6 py-4">
-              <img
-                src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=100&h=100&fit=crop"
-                alt="Keripik"
-                class="w-16 h-16 object-cover rounded-lg"
-              />
-            </td>
-            <td class="px-6 py-4">
-              <div class="text-sm font-medium text-gray-800">
-                Keripik Singkong
-              </div>
-              <div class="text-xs text-gray-500">Keripik singkong original</div>
-            </td>
-            <td class="px-6 py-4">
-              <span
-                class="px-3 py-1 text-xs font-semibold bg-purple-100 text-purple-800 rounded-full"
-              >
-                Snack
-              </span>
-            </td>
-            <td class="px-6 py-4 text-sm font-semibold text-primary">
-              Rp 8,000
-            </td>
-            <td class="px-6 py-4 text-sm text-gray-600">120</td>
-            <td class="px-6 py-4">
-              <span
-                class="px-3 py-1 text-xs font-semibold bg-green-100 text-green-800 rounded-full"
-                >Aktif</span
-              >
-            </td>
-            <td class="px-6 py-4 text-sm">
-              <button
-                onclick="editMenu(4)"
-                class="text-primary hover:text-blue-700 mr-3"
-                title="Edit"
-              >
-                <i class="fas fa-edit"></i>
-              </button>
-              <button
-                onclick="viewMenu(4)"
-                class="text-green-600 hover:text-green-700 mr-3"
-                title="Lihat Detail"
-              >
-                <i class="fas fa-eye"></i>
-              </button>
-              <button
-                onclick="deleteMenu(4)"
-                class="text-red-600 hover:text-red-700"
-                title="Hapus"
-              >
-                <i class="fas fa-trash"></i>
-              </button>
-            </td>
-          </tr>
-          <tr
-            class="hover:bg-blue-50 transition menu-item"
-            data-category="dessert"
-            data-status="aktif"
-            data-id="5"
-          >
-            <td class="px-6 py-4">
-              <img
-                src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=100&h=100&fit=crop"
-                alt="Es Krim"
-                class="w-16 h-16 object-cover rounded-lg"
-              />
-            </td>
-            <td class="px-6 py-4">
-              <div class="text-sm font-medium text-gray-800">
-                Es Krim Vanilla
-              </div>
-              <div class="text-xs text-gray-500">Es krim vanilla premium</div>
-            </td>
-            <td class="px-6 py-4">
-              <span
-                class="px-3 py-1 text-xs font-semibold bg-pink-100 text-pink-800 rounded-full"
-              >
-                Dessert
-              </span>
-            </td>
-            <td class="px-6 py-4 text-sm font-semibold text-primary">
-              Rp 15,000
-            </td>
-            <td class="px-6 py-4 text-sm text-gray-600">32</td>
-            <td class="px-6 py-4">
-              <span
-                class="px-3 py-1 text-xs font-semibold bg-green-100 text-green-800 rounded-full"
-                >Aktif</span
-              >
-            </td>
-            <td class="px-6 py-4 text-sm">
-              <button
-                onclick="editMenu(5)"
-                class="text-primary hover:text-blue-700 mr-3"
-                title="Edit"
-              >
-                <i class="fas fa-edit"></i>
-              </button>
-              <button
-                onclick="viewMenu(5)"
-                class="text-green-600 hover:text-green-700 mr-3"
-                title="Lihat Detail"
-              >
-                <i class="fas fa-eye"></i>
-              </button>
-              <button
-                onclick="deleteMenu(5)"
-                class="text-red-600 hover:text-red-700"
-                title="Hapus"
-              >
-                <i class="fas fa-trash"></i>
-              </button>
-            </td>
-          </tr>
-          <tr
-            class="hover:bg-blue-50 transition menu-item"
-            data-category="makanan"
-            data-status="nonaktif"
-            data-id="6"
-          >
-            <td class="px-6 py-4">
-              <img
-                src="https://images.unsplash.com/photo-1563379091339-03246963d3c9?w=100&h=100&fit=crop"
-                alt="Sate"
-                class="w-16 h-16 object-cover rounded-lg opacity-50"
-              />
-            </td>
-            <td class="px-6 py-4">
-              <div class="text-sm font-medium text-gray-800">Sate Ayam</div>
-              <div class="text-xs text-gray-500">
-                Sate ayam dengan bumbu kacang
-              </div>
-            </td>
-            <td class="px-6 py-4">
-              <span
-                class="px-3 py-1 text-xs font-semibold bg-blue-100 text-blue-800 rounded-full"
-              >
-                Makanan
-              </span>
-            </td>
-            <td class="px-6 py-4 text-sm font-semibold text-primary">
-              Rp 30,000
-            </td>
-            <td class="px-6 py-4 text-sm text-gray-600">0</td>
-            <td class="px-6 py-4">
-              <span
-                class="px-3 py-1 text-xs font-semibold bg-red-100 text-red-800 rounded-full"
-                >Nonaktif</span
-              >
-            </td>
-            <td class="px-6 py-4 text-sm">
-              <button
-                onclick="editMenu(6)"
-                class="text-primary hover:text-blue-700 mr-3"
-                title="Edit"
-              >
-                <i class="fas fa-edit"></i>
-              </button>
-              <button
-                onclick="viewMenu(6)"
-                class="text-green-600 hover:text-green-700 mr-3"
-                title="Lihat Detail"
-              >
-                <i class="fas fa-eye"></i>
-              </button>
-              <button
-                onclick="deleteMenu(6)"
-                class="text-red-600 hover:text-red-700"
-                title="Hapus"
-              >
-                <i class="fas fa-trash"></i>
-              </button>
-            </td>
-          </tr>
-        </tbody>
+        <tbody class="divide-y divide-gray-200" id="menuTableBody"></tbody>
       </table>
     </div>
   </div>
@@ -1121,137 +352,193 @@
 </div>
 
 <script>
+  const $ = (id) => document.getElementById(id);
   let currentView = "grid";
 
-  // Toggle view function
-  function toggleView(view) {
-    currentView = view;
-    const gridView = document.getElementById("menuGridView");
-    const listView = document.getElementById("menuListView");
+  const menuData = [
+    { id: 1, name: "Nasi Goreng Spesial", category: "makanan", price: 25000, stock: 45, status: "aktif", image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&h=250&fit=crop", description: "Nasi goreng dengan telur dan ayam" },
+    { id: 2, name: "Es Jeruk Manis", category: "minuman", price: 12000, stock: 78, status: "aktif", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400&h=250&fit=crop", description: "Minuman segar jeruk peras" },
+    { id: 3, name: "Mie Ayam Bakso", category: "makanan", price: 20000, stock: 0, status: "habis", image: "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=400&h=250&fit=crop", description: "Mie ayam dengan bakso dan pangsit" },
+    { id: 4, name: "Keripik Singkong", category: "snack", price: 8000, stock: 120, status: "aktif", image: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=400&h=250&fit=crop", description: "Keripik singkong original" },
+    { id: 5, name: "Es Krim Vanilla", category: "dessert", price: 15000, stock: 32, status: "aktif", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400&h=250&fit=crop", description: "Es krim vanilla premium" },
+    { id: 6, name: "Sate Ayam", category: "makanan", price: 30000, stock: 0, status: "nonaktif", image: "https://images.unsplash.com/photo-1563379091339-03246963d3c9?w=400&h=250&fit=crop", description: "Sate ayam dengan bumbu kacang" }
+  ];
 
-    if (view === "grid") {
-      gridView.classList.remove("hidden");
-      listView.classList.add("hidden");
-    } else {
-      gridView.classList.add("hidden");
-      listView.classList.remove("hidden");
-    }
-    filterMenu(); // Reapply filters after view change
+  const categoryColors = {
+    makanan: "bg-blue-100 text-blue-800",
+    minuman: "bg-green-100 text-green-800",
+    snack: "bg-purple-100 text-purple-800",
+    dessert: "bg-pink-100 text-pink-800"
+  };
+
+  const categoryLabels = {
+    makanan: "Makanan",
+    minuman: "Minuman",
+    snack: "Snack",
+    dessert: "Dessert"
+  };
+
+  function formatPrice(price) {
+    return `Rp ${price.toLocaleString("id-ID")}`;
   }
 
-  // Filter menu function
+  function renderGridCard(menu) {
+    const imgOpacity = menu.status === "habis" ? "opacity-75" : menu.status === "nonaktif" ? "opacity-50" : "";
+    const stockColor = menu.stock === 0 ? "text-red-600" : "";
+    const statusBadge = menu.status === "habis" ? `<div class="absolute top-2 right-2 sm:top-3 sm:right-3"><span class="px-2 py-0.5 sm:px-3 sm:py-1 text-xs font-semibold bg-yellow-100 text-yellow-800 rounded-full">Habis</span></div>` : "";
+
+    return `
+      <div class="bg-white rounded-xl shadow-md overflow-hidden menu-item flex flex-col" data-category="${menu.category}" data-status="${menu.status}" data-id="${menu.id}">
+        <div class="relative">
+          <img src="${menu.image}" alt="${menu.name}" class="w-full h-40 object-cover ${imgOpacity}" />
+          ${statusBadge}
+        </div>
+        <div class="p-3 sm:p-4 md:p-5 flex flex-col flex-1">
+          <div class="flex items-start justify-between mb-2">
+            <div class="flex-1">
+              <h3 class="text-sm sm:text-base md:text-lg font-bold text-gray-800 mb-1">${menu.name}</h3>
+            </div>
+          </div>
+          <div class="flex items-center justify-start mb-2 sm:mb-3">
+            <span class="text-sm sm:text-base md:text-lg font-bold text-primary">${formatPrice(menu.price)}</span>
+          </div>
+          <div class="flex items-center justify-between mb-2 sm:mb-4">
+            <div class="flex items-center text-xs sm:text-sm text-gray-600">
+              <i class="fas fa-box mr-1 sm:mr-2"></i>
+              <span>Stok: <strong class="${stockColor}">${menu.stock}</strong></span>
+            </div>
+          </div>
+          <div class="flex gap-1 sm:gap-2 mt-auto">
+            <button onclick="editMenu(${menu.id})" class="flex-1 bg-primary text-white px-2 py-1.5 sm:px-3 sm:py-2 rounded-lg hover:bg-blue-800 transition text-xs sm:text-sm" title="Edit">
+              <i class="fas fa-edit sm:mr-1"></i>
+              <span class="hidden sm:inline">Edit</span>
+            </button>
+            <button onclick="deleteMenu(${menu.id})" class="px-2 py-1.5 sm:px-3 sm:py-2 border border-red-300 text-red-600 rounded-lg hover:bg-red-50 transition text-xs sm:text-sm" title="Hapus">
+              <i class="fas fa-trash"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  function renderTableRow(menu) {
+    const imgOpacity = menu.status === "nonaktif" ? "opacity-50" : "";
+    const statusBadge = menu.status === "habis" ? `<span class="px-3 py-1 text-xs font-semibold bg-yellow-100 text-yellow-800 rounded-full">Habis</span>` : "";
+
+    return `
+      <tr class="hover:bg-blue-50 transition menu-item" data-category="${menu.category}" data-status="${menu.status}" data-id="${menu.id}">
+        <td class="px-6 py-4">
+          <img src="${menu.image.replace("w=400&h=250", "w=100&h=100")}" alt="${menu.name}" class="w-16 h-16 object-cover rounded-lg ${imgOpacity}" />
+        </td>
+        <td class="px-6 py-4">
+          <div class="text-sm font-medium text-gray-800">${menu.name}</div>
+          <div class="text-xs text-gray-500">${menu.description}</div>
+        </td>
+        <td class="px-6 py-4">
+          <span class="px-3 py-1 text-xs font-semibold ${categoryColors[menu.category]} rounded-full">${categoryLabels[menu.category]}</span>
+        </td>
+        <td class="px-6 py-4 text-sm font-semibold text-primary">${formatPrice(menu.price)}</td>
+        <td class="px-6 py-4 text-sm text-gray-600">${menu.stock}</td>
+        <td class="px-6 py-4">${statusBadge}</td>
+        <td class="px-6 py-4 text-sm">
+          <button onclick="editMenu(${menu.id})" class="text-primary hover:text-blue-700 mr-3" title="Edit">
+            <i class="fas fa-edit"></i>
+          </button>
+          <button onclick="deleteMenu(${menu.id})" class="text-red-600 hover:text-red-700" title="Hapus">
+            <i class="fas fa-trash"></i>
+          </button>
+        </td>
+      </tr>
+    `;
+  }
+
+  function renderMenus() {
+    $("menuGridView").innerHTML = menuData.map(renderGridCard).join("");
+    $("menuTableBody").innerHTML = menuData.map(renderTableRow).join("");
+  }
+
+  function toggleView(view) {
+    currentView = view;
+    $("menuGridView").classList.toggle("hidden", view !== "grid");
+    $("menuListView").classList.toggle("hidden", view === "grid");
+    filterMenu();
+  }
+
   function filterMenu() {
-    const searchTerm = document
-      .getElementById("searchMenu")
-      .value.toLowerCase();
-    const categoryFilter = document.getElementById("filterCategory").value;
-    const statusFilter = document.getElementById("filterStatus").value;
-    const menuItems = document.querySelectorAll(".menu-item");
+    const search = $("searchMenu").value.toLowerCase();
+    const category = $("filterCategory").value;
+    const status = $("filterStatus").value;
+    const selector = currentView === "grid" ? "h3" : "td:nth-child(2) .text-sm";
 
-    menuItems.forEach((item) => {
-      let menuName = "";
-
-      if (currentView === "grid") {
-        // For grid view, get name from h3
-        const nameElement = item.querySelector("h3");
-        menuName = nameElement ? nameElement.textContent.toLowerCase() : "";
-      } else {
-        // For list view, get name from table cell
-        const nameElement = item.querySelector("td:nth-child(2) .text-sm");
-        menuName = nameElement ? nameElement.textContent.toLowerCase() : "";
-      }
-
-      const category = item.getAttribute("data-category");
-      const status = item.getAttribute("data-status");
-
-      const matchesSearch = menuName.includes(searchTerm);
-      const matchesCategory = !categoryFilter || category === categoryFilter;
-      const matchesStatus = !statusFilter || status === statusFilter;
-
-      if (matchesSearch && matchesCategory && matchesStatus) {
-        item.style.display = "";
-      } else {
-        item.style.display = "none";
-      }
+    document.querySelectorAll(".menu-item").forEach((item) => {
+      const name = item.querySelector(selector)?.textContent.toLowerCase() || "";
+      const matches =
+        name.includes(search) &&
+        (!category || item.dataset.category === category) &&
+        (!status || item.dataset.status === status);
+      item.style.display = matches ? "" : "none";
     });
   }
 
-  // Modal functions
+  function openModal(mode = "add", id = null) {
+    const modal = $("menuModal");
+    modal.classList.remove("hidden");
+    modal.classList.add("flex");
+    $("modalTitle").textContent = mode === "add" ? "Tambah Menu Baru" : "Edit Menu";
+    $("menuForm").reset();
+    $("menuImagePreview").src = "https://via.placeholder.com/150";
+    $("menuForm").setAttribute("data-mode", mode);
+    if (id) $("menuForm").setAttribute("data-id", id);
+  }
+
   function openAddMenuModal() {
-    document.getElementById("menuModal").classList.remove("hidden");
-    document.getElementById("menuModal").classList.add("flex");
-    document.getElementById("modalTitle").textContent = "Tambah Menu Baru";
-    document.getElementById("menuForm").reset();
-    document.getElementById("menuImagePreview").src =
-      "https://via.placeholder.com/150";
-    document.getElementById("menuForm").setAttribute("data-mode", "add");
+    openModal("add");
   }
 
   function closeMenuModal(event) {
     if (!event || event.target.id === "menuModal") {
-      document.getElementById("menuModal").classList.add("hidden");
-      document.getElementById("menuModal").classList.remove("flex");
+      $("menuModal").classList.add("hidden");
+      $("menuModal").classList.remove("flex");
     }
   }
 
   function updateImagePreview() {
-    const url = document.getElementById("menuImage").value;
-    if (url) {
-      document.getElementById("menuImagePreview").src = url;
-    }
+    const url = $("menuImage").value;
+    if (url) $("menuImagePreview").src = url;
   }
 
   function editMenu(id) {
-    // In a real application, you would fetch menu data by ID
-    document.getElementById("menuModal").classList.remove("hidden");
-    document.getElementById("menuModal").classList.add("flex");
-    document.getElementById("modalTitle").textContent = "Edit Menu";
-    document.getElementById("menuForm").setAttribute("data-mode", "edit");
-    document.getElementById("menuForm").setAttribute("data-id", id);
-
-    // Example: Fill form with menu data
-    // This would typically come from an API call
-    const menuItem = document.querySelector(`[data-id="${id}"]`);
-    if (menuItem) {
-      // You would populate the form fields here based on menuItem data
-      // For now, just open the modal
-    }
-  }
-
-  function viewMenu(id) {
-    // In a real application, you would show menu details
-    alert(`Lihat detail menu ID: ${id}`);
+    openModal("edit", id);
   }
 
   function deleteMenu(id) {
     if (confirm("Apakah Anda yakin ingin menghapus menu ini?")) {
-      // In a real application, you would delete the menu via API
       alert(`Menu ID: ${id} akan dihapus`);
-      // Remove the menu item from both views
-      const menuItems = document.querySelectorAll(`[data-id="${id}"]`);
-      menuItems.forEach((item) => {
-        item.remove();
-      });
+      const index = menuData.findIndex(m => m.id === id);
+      if (index > -1) {
+        menuData.splice(index, 1);
+        renderMenus();
+      }
     }
   }
 
   function saveMenu(event) {
     event.preventDefault();
-    const mode = document.getElementById("menuForm").getAttribute("data-mode");
+    const mode = $("menuForm").getAttribute("data-mode");
     const formData = {
-      name: document.getElementById("menuName").value,
-      category: document.getElementById("menuCategory").value,
-      price: document.getElementById("menuPrice").value,
-      stock: document.getElementById("menuStock").value,
-      status: document.getElementById("menuStatus").value,
-      description: document.getElementById("menuDescription").value,
-      image: document.getElementById("menuImage").value,
+      name: $("menuName").value,
+      category: $("menuCategory").value,
+      price: $("menuPrice").value,
+      stock: $("menuStock").value,
+      status: $("menuStatus").value,
+      description: $("menuDescription").value,
+      image: $("menuImage").value,
     };
-
-    // In a real application, you would save this via API
     console.log(`${mode} menu:`, formData);
     alert(`Menu berhasil ${mode === "add" ? "ditambahkan" : "diperbarui"}!`);
     closeMenuModal();
-    // Reload or update the table
   }
+
+  renderMenus();
 </script>

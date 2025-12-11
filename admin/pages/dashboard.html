@@ -64,7 +64,7 @@
 <!-- Charts & Tables -->
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
   <!-- Recent Activity -->
-  <div class="bg-white rounded-xl shadow-md p-6">
+  <div class="bg-white rounded-xl shadow-md p-6 border-l-4 border-primary">
     <h3 class="text-xl font-semibold mb-4 text-primary">Aktivitas Terbaru</h3>
     <div class="space-y-4">
       <div class="flex items-center space-x-4 p-3 bg-blue-50 rounded-lg">
@@ -100,7 +100,7 @@
   </div>
 
   <!-- Sales Chart -->
-  <div class="bg-white rounded-xl shadow-md p-6">
+  <div class="bg- rounded-xl shadow-md p-6 border-l-4 border-primary">
     <h3 class="text-xl font-semibold mb-4 text-primary">
       Grafik Pendapatan Bulanan
     </h3>
@@ -111,112 +111,101 @@
 </div>
 
 <div
-  class="bg-white rounded-xl shadow-md p-6 border-l-4 border-primary overflow-hidden"
+  class="bg-white rounded-xl p-6 border-l-4 border-primary overflow-hidden"
 >
   <div class="p-6 border-b bg-primary">
-    <h3 class="text-lg font-semibold text-white">Pesanan Terbaru</h3>
+    <h3 class="text-lg font-semibold text-white text-center">Pesanan Terbaru</h3>
   </div>
   <div class="overflow-x-auto">
     <table class="w-full">
       <thead class="bg-blue-50">
         <tr>
           <th
-            class="px-6 py-3 text-left text-xs font-medium text-primary uppercase"
+            class="px-2 py-3 text-center text-xs font-medium text-primary uppercase w-10"
           >
             ID Pesanan
           </th>
           <th
-            class="px-6 py-3 text-left text-xs font-medium text-primary uppercase"
+            class="px-6 py-3 text-center text-xs font-medium text-primary uppercase"
           >
             Pelanggan
           </th>
           <th
-            class="px-6 py-3 text-left text-xs font-medium text-primary uppercase"
+            class="px-6 py-3 text-center text-xs font-medium text-primary uppercase"
           >
-            Produk
+            Menu
           </th>
           <th
-            class="px-6 py-3 text-left text-xs font-medium text-primary uppercase"
+            class="px-6 py-3 text-center text-xs font-medium text-primary uppercase"
           >
             Total
           </th>
           <th
-            class="px-6 py-3 text-left text-xs font-medium text-primary uppercase"
+            class="px-6 py-3 text-center text-xs font-medium text-primary uppercase"
           >
             Status
-          </th>
-          <th
-            class="px-6 py-3 text-left text-xs font-medium text-primary uppercase"
-          >
-            Aksi
           </th>
         </tr>
       </thead>
       <tbody class="divide-y divide-gray-200">
-        <tr class="hover:bg-blue-50 transition">
-          <td class="px-6 py-4 text-sm font-medium text-gray-800">#ORD-001</td>
-          <td class="px-6 py-4 text-sm text-gray-600">John Doe</td>
-          <td class="px-6 py-4 text-sm text-gray-600">Laptop Gaming</td>
+        <tr>
+          <td class="px-6 py-4 text-sm font-medium text-gray-800">
+            1
+          </td>
+          <td class="px-6 py-4 text-sm text-gray-600">
+            John Doe
+          </td>
+          <td class="px-6 py-4 text-sm text-gray-600">
+            Laptop Gaming
+          </td>
           <td class="px-6 py-4 text-sm font-semibold text-primary">
             Rp 15,000,000
           </td>
-          <td class="px-6 py-4">
+          <td class="px-6 py-4 text-center">
             <span
               class="px-3 py-1 text-xs font-semibold bg-green-100 text-green-800 rounded-full"
               >Selesai</span
             >
           </td>
-          <td class="px-6 py-4 text-sm">
-            <button class="text-primary hover:text-blue-700 mr-3">
-              <i class="fas fa-eye"></i>
-            </button>
-            <button class="text-primary hover:text-blue-700">
-              <i class="fas fa-edit"></i>
-            </button>
-          </td>
         </tr>
-        <tr class="hover:bg-blue-50 transition">
-          <td class="px-6 py-4 text-sm font-medium text-gray-800">#ORD-002</td>
-          <td class="px-6 py-4 text-sm text-gray-600">Jane Smith</td>
-          <td class="px-6 py-4 text-sm text-gray-600">Smartphone</td>
+        <tr>
+          <td class="px-6 py-4 text-sm font-medium text-gray-800">
+            2
+          </td>
+          <td class="px-6 py-4 text-sm text-gray-600">
+            Jane Smith
+          </td>
+          <td class="px-6 py-4 text-sm text-gray-600">
+            Smartphone
+          </td>
           <td class="px-6 py-4 text-sm font-semibold text-primary">
             Rp 8,500,000
           </td>
-          <td class="px-6 py-4">
+          <td class="px-6 py-4 text-center">
             <span
               class="px-3 py-1 text-xs font-semibold bg-yellow-100 text-yellow-800 rounded-full"
               >Proses</span
             >
           </td>
-          <td class="px-6 py-4 text-sm">
-            <button class="text-primary hover:text-blue-700 mr-3">
-              <i class="fas fa-eye"></i>
-            </button>
-            <button class="text-primary hover:text-blue-700">
-              <i class="fas fa-edit"></i>
-            </button>
-          </td>
         </tr>
-        <tr class="hover:bg-blue-50 transition">
-          <td class="px-6 py-4 text-sm font-medium text-gray-800">#ORD-003</td>
-          <td class="px-6 py-4 text-sm text-gray-600">Mike Johnson</td>
-          <td class="px-6 py-4 text-sm text-gray-600">Headphone</td>
+        <tr>
+          <td class="px-6 py-4 text-sm font-medium text-gray-800">
+            3
+          </td>
+          <td class="px-6 py-4 text-sm text-gray-600">
+            Mike Johnson
+          </td>
+          <td class="px-6 py-4 text-sm text-gray-600">
+            Headphone
+          </td>
           <td class="px-6 py-4 text-sm font-semibold text-primary">
             Rp 2,500,000
           </td>
-          <td class="px-6 py-4">
+          <td class="px-6 py-4 text-center">
             <span
               class="px-3 py-1 text-xs font-semibold bg-blue-100 text-primary rounded-full"
               >Pending</span
             >
-          </td>
-          <td class="px-6 py-4 text-sm">
-            <button class="text-primary hover:text-blue-700 mr-3">
-              <i class="fas fa-eye"></i>
-            </button>
-            <button class="text-primary hover:text-blue-700">
-              <i class="fas fa-edit"></i>
-            </button>
           </td>
         </tr>
       </tbody>

@@ -1,0 +1,545 @@
+<!-- Header -->
+<div
+  class="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"
+>
+  <div>
+    <h2 class="text-2xl sm:text-3xl font-bold text-primary">Manajemen Pesanan</h2>
+    <p class="text-gray-500 mt-1 text-sm sm:text-base">
+      Pantau status pesanan dan kelola tindakan cepat
+    </p>
+  </div>
+  <div class="flex gap-3 w-full sm:w-auto">
+    <button
+      class="flex-1 sm:flex-none bg-white border border-primary text-primary px-4 py-3 sm:px-5 rounded-lg flex items-center justify-center space-x-2"
+    >
+      <i class="fas fa-download"></i>
+      <span>Export</span>
+    </button>
+    <button
+      class="flex-1 sm:flex-none bg-primary text-white px-4 py-3 sm:px-6 rounded-lg shadow hover:shadow-lg transition flex items-center justify-center space-x-2"
+    >
+      <i class="fas fa-plus"></i>
+      <span>Tambah Pesanan</span>
+    </button>
+  </div>
+</div>
+
+<!-- Stat Cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+  <div class="bg-white rounded-xl shadow-md p-6 border-l-4 border-primary">
+    <div class="flex items-center justify-between">
+      <div>
+        <p class="text-gray-500 text-sm mb-1">Total Pesanan</p>
+        <h3 class="text-2xl font-bold text-gray-800">1,284</h3>
+        <p class="text-green-500 text-sm mt-2">
+          <i class="fas fa-arrow-up"></i> 6% dari minggu lalu
+        </p>
+      </div>
+      <div class="bg-blue-50 p-4 rounded-lg">
+        <i class="fa-solid fa-receipt text-3xl text-primary"></i>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-xl shadow-md p-6 border-l-4 border-yellow-500">
+    <div class="flex items-center justify-between">
+      <div>
+        <p class="text-gray-500 text-sm mb-1">Perlu Diproses</p>
+        <h3 class="text-2xl font-bold text-gray-800">86</h3>
+        <p class="text-yellow-500 text-sm mt-2">
+          <i class="fas fa-clock"></i> Menunggu konfirmasi
+        </p>
+      </div>
+      <div class="bg-yellow-50 p-4 rounded-lg">
+        <i class="fas fa-hourglass-half text-3xl text-yellow-500"></i>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-xl shadow-md p-6 border-l-4 border-green-500">
+    <div class="flex items-center justify-between">
+      <div>
+        <p class="text-gray-500 text-sm mb-1">Selesai</p>
+        <h3 class="text-2xl font-bold text-gray-800">1,102</h3>
+        <p class="text-green-500 text-sm mt-2">
+          <i class="fas fa-check-circle"></i> Terkirim ke pelanggan
+        </p>
+      </div>
+      <div class="bg-green-50 p-4 rounded-lg">
+        <i class="fas fa-check text-3xl text-green-500"></i>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-xl shadow-md p-6 border-l-4 border-red-500">
+    <div class="flex items-center justify-between">
+      <div>
+        <p class="text-gray-500 text-sm mb-1">Dibatalkan</p>
+        <h3 class="text-2xl font-bold text-gray-800">18</h3>
+        <p class="text-red-500 text-sm mt-2">
+          <i class="fas fa-times-circle"></i> Refund / gagal bayar
+        </p>
+      </div>
+      <div class="bg-red-50 p-4 rounded-lg">
+        <i class="fas fa-ban text-3xl text-red-500"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Filters -->
+<div class="bg-white rounded-xl shadow-md p-6 mb-6">
+  <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+    <div class="md:col-span-2">
+      <div class="relative">
+        <i
+          class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+        ></i>
+        <input
+          type="text"
+          id="orderSearch"
+          placeholder="Cari ID pesanan / nama pelanggan / menu"
+          class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+        />
+      </div>
+    </div>
+    <div>
+      <input
+        type="date"
+        id="orderStartDate"
+        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+      />
+    </div>
+    <div>
+      <input
+        type="date"
+        id="orderEndDate"
+        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+      />
+    </div>
+    <div class="grid grid-cols-2 gap-3 md:grid-cols-1">
+      <select
+        id="orderStatus"
+        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+      >
+        <option value="">Status: Semua</option>
+        <option value="baru">Baru</option>
+        <option value="proses">Proses</option>
+        <option value="dikirim">Dikirim</option>
+        <option value="selesai">Selesai</option>
+        <option value="batal">Dibatalkan</option>
+      </select>
+      <select
+        id="orderPayment"
+        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+      >
+        <option value="">Pembayaran: Semua</option>
+        <option value="cod">COD</option>
+        <option value="transfer">Transfer</option>
+        <option value="ewallet">E-Wallet</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<!-- Orders Table -->
+<div
+  class="bg-white rounded-xl overflow-hidden border-l-4 border-primary p-6"
+>
+  <div class="p-6 border-b bg-primary">
+    <h3 class="text-lg font-semibold text-white">Daftar Pesanan</h3>
+  </div>
+  <div class="overflow-x-auto">
+    <table class="w-full">
+      <thead class="bg-blue-50">
+        <tr>
+          <th
+            class="px-6 py-3 text-left text-xs font-medium text-primary uppercase text-center"
+          >
+            ID
+          </th>
+          <th
+            class="px-6 py-3 text-left text-xs font-medium text-primary uppercase text-center"
+          >
+            Pelanggan
+          </th>
+          <th
+            class="px-6 py-3 text-left text-xs font-medium text-primary uppercase text-center"
+          >
+            Meja
+          </th>
+          <th
+            class="px-6 py-3 text-left text-xs font-medium text-primary uppercase text-center"
+          >
+            Item
+          </th>
+          <th
+            class="px-6 py-3 text-left text-xs font-medium text-primary uppercase text-center"
+          >
+            Total
+          </th>
+          <th
+            class="px-6 py-3 text-left text-xs font-medium text-primary uppercase text-center"
+          >
+            Metode
+          </th>
+          <th
+            class="px-6 py-3 text-left text-xs font-medium text-primary uppercase text-center"
+          >
+            Status
+          </th>
+          <th
+            class="px-6 py-3 text-left text-xs font-medium text-primary uppercase text-center"
+          >
+            Aksi
+          </th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-200" id="orderTableBody">
+        <tr
+          class="transition order-row"
+          data-status="baru"
+          data-payment="transfer"
+          data-date="2025-12-11"
+        >
+          <td class="px-6 py-4 text-sm font-semibold text-gray-800">#FF-9021</td>
+          <td class="px-6 py-4">
+            <div class="text-sm font-medium text-gray-800">Diana Pratama</div>
+            <div class="text-xs text-gray-500">diana@mail.com • 0812-3333-2222</div>
+          </td>
+          <td class="px-6 py-4 text-sm text-gray-600 text-center">12</td>
+          <td class="px-6 py-4 text-sm text-gray-600">2x Nasi Goreng, 1x Es Teh</td>
+          <td class="px-6 py-4 text-sm font-semibold text-primary">Rp 82,000</td>
+          <td class="px-6 py-4 text-sm text-gray-600">Transfer</td>
+          <td class="px-6 py-4">
+            <span
+              class="px-3 py-1 text-xs font-semibold bg-blue-100 text-primary rounded-full flex justify-center items-center"
+            >Baru</span>
+          </td>
+          <td class="px-6 py-4 text-sm">
+            <button class="text-primary hover:text-blue-700 edit-order-btn" data-order-id="#FF-9021">
+              <i class="fas fa-pen"></i>
+            </button>
+          </td>
+        </tr>
+        <tr
+          class="transition order-row"
+          data-status="proses"
+          data-payment="cod"
+          data-date="2025-12-10"
+        >
+          <td class="px-6 py-4 text-sm font-semibold text-gray-800">#FF-9012</td>
+          <td class="px-6 py-4">
+            <div class="text-sm font-medium text-gray-800">Rahmat Hidayat</div>
+            <div class="text-xs text-gray-500">rahmat@mail.com • 0813-5555-4444</div>
+          </td>
+          <td class="px-6 py-4 text-sm text-gray-600 text-center">7</td>
+          <td class="px-6 py-4 text-sm text-gray-600">1x Paket Ayam Bakar</td>
+          <td class="px-6 py-4 text-sm font-semibold text-primary">Rp 45,000</td>
+          <td class="px-6 py-4 text-sm text-gray-600">COD</td>
+          <td class="px-6 py-4">
+            <span
+              class="px-3 py-1 text-xs font-semibold bg-yellow-100 text-yellow-800 rounded-full flex justify-center items-center"
+              >Proses</span
+            >
+          </td>
+          <td class="px-6 py-4 text-sm">
+            <button class="text-primary hover:text-blue-700 edit-order-btn" data-order-id="#FF-9012">
+              <i class="fas fa-pen"></i>
+            </button>
+          </td>
+        </tr>
+        <tr
+          class="transition order-row"
+          data-status="dikirim"
+          data-payment="ewallet"
+          data-date="2025-12-09"
+        >
+          <td class="px-6 py-4 text-sm font-semibold text-gray-800">#FF-8998</td>
+          <td class="px-6 py-4">
+            <div class="text-sm font-medium text-gray-800">Maria Sari</div>
+            <div class="text-xs text-gray-500">maria@mail.com • 0817-1111-9090</div>
+          </td>
+          <td class="px-6 py-4 text-sm text-gray-600 text-center">4</td>
+          <td class="px-6 py-4 text-sm text-gray-600">3x Kopi Susu, 2x Brownies</td>
+          <td class="px-6 py-4 text-sm font-semibold text-primary">Rp 120,000</td>
+          <td class="px-6 py-4 text-sm text-gray-600">E-Wallet</td>
+          <td class="px-6 py-4">
+            <span
+              class="px-3 py-1 text-xs font-semibold bg-indigo-100 text-indigo-700 rounded-full flex justify-center items-center"
+              >Dikirim</span
+            >
+          </td>
+          <td class="px-6 py-4 text-sm">
+            <button class="text-primary hover:text-blue-700 edit-order-btn" data-order-id="#FF-8998">
+              <i class="fas fa-pen"></i>
+            </button>
+          </td>
+        </tr>
+        <tr
+          class="transition order-row"
+          data-status="selesai"
+          data-payment="transfer"
+          data-date="2025-12-08"
+        >
+          <td class="px-6 py-4 text-sm font-semibold text-gray-800">#FF-8970</td>
+          <td class="px-6 py-4">
+            <div class="text-sm font-medium text-gray-800">Andi Wijaya</div>
+            <div class="text-xs text-gray-500">andi@mail.com • 0814-8888-7777</div>
+          </td>
+          <td class="px-6 py-4 text-sm text-gray-600 text-center">15</td>
+          <td class="px-6 py-4 text-sm text-gray-600">
+            1x Beef Burger, 1x Kentang Goreng
+          </td>
+          <td class="px-6 py-4 text-sm font-semibold text-primary">Rp 65,000</td>
+          <td class="px-6 py-4 text-sm text-gray-600">Transfer</td>
+          <td class="px-6 py-4">
+            <span
+              class="px-3 py-1 text-xs font-semibold bg-green-100 text-green-800 rounded-full flex justify-center items-center"
+              >Selesai</span
+            >
+          </td>
+          <td class="px-6 py-4 text-sm">
+            <button class="text-primary hover:text-blue-700 edit-order-btn" data-order-id="#FF-8970">
+              <i class="fas fa-pen"></i>
+            </button>
+          </td>
+        </tr>
+        <tr
+          class="transition order-row"
+          data-status="batal"
+          data-payment="ewallet"
+          data-date="2025-12-08"
+        >
+          <td class="px-6 py-4 text-sm font-semibold text-gray-800">#FF-8961</td>
+          <td class="px-6 py-4">
+            <div class="text-sm font-medium text-gray-800">Widya Lestari</div>
+            <div class="text-xs text-gray-500">widya@mail.com • 0812-9090-8080</div>
+          </td>
+          <td class="px-6 py-4 text-sm text-gray-600 text-center">9</td>
+          <td class="px-6 py-4 text-sm text-gray-600">2x Soto Ayam</td>
+          <td class="px-6 py-4 text-sm font-semibold text-primary">Rp 40,000</td>
+          <td class="px-6 py-4 text-sm text-gray-600">E-Wallet</td>
+          <td class="px-6 py-4">
+            <span
+              class="px-3 py-1 text-xs font-semibold bg-red-100 text-red-700 rounded-full flex justify-center items-center"
+              >Dibatalkan</span
+            >
+          </td>
+          <td class="px-6 py-4 text-sm">
+            <button class="text-primary hover:text-blue-700 edit-order-btn" data-order-id="#FF-8961">
+              <i class="fas fa-pen"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Modal Edit Status Pesanan -->
+<div
+  id="editOrderModal"
+  class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4"
+>
+  <div
+    class="bg-white rounded-lg shadow-2xl max-w-sm w-full max-h-[85vh] overflow-y-auto"
+  >
+    <!-- Modal Header -->
+    <div class="bg-primary text-white p-4 rounded-t-lg flex items-center justify-between">
+      <h3 class="text-lg font-semibold">Ubah Status Pesanan</h3>
+      <button
+        id="closeModalBtn"
+        class="text-white hover:text-gray-200 transition"
+      >
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+
+    <!-- Modal Body -->
+    <div class="p-4">
+      <!-- Order Info -->
+      <div class="mb-4 space-y-2">
+        <div class="flex items-center justify-between pb-2 border-b text-sm">
+          <span class="text-gray-600 font-medium">ID Pesanan:</span>
+          <span class="text-gray-800 font-semibold" id="modalOrderId">-</span>
+        </div>
+        <div class="flex items-center justify-between pb-2 border-b text-sm">
+          <span class="text-gray-600 font-medium">Pelanggan:</span>
+          <span class="text-gray-800 font-semibold text-right max-w-[150px] truncate" id="modalCustomerName">-</span>
+        </div>
+        <div class="flex items-center justify-between pb-2 border-b text-sm">
+          <span class="text-gray-600 font-medium">Meja:</span>
+          <span class="text-gray-800 font-semibold" id="modalTableNumber">-</span>
+        </div>
+        <div class="flex items-center justify-between pb-2 border-b text-sm">
+          <span class="text-gray-600 font-medium">Total:</span>
+          <span class="text-primary font-semibold" id="modalTotal">-</span>
+        </div>
+        <div class="flex items-center justify-between pb-2 border-b text-sm">
+          <span class="text-gray-600 font-medium">Pembayaran:</span>
+          <span class="text-gray-800 font-semibold" id="modalPayment">-</span>
+        </div>
+        <div class="flex items-center justify-between text-sm">
+          <span class="text-gray-600 font-medium">Status Saat Ini:</span>
+          <span class="px-2 py-1 text-xs font-semibold rounded-full" id="modalCurrentStatus">-</span>
+        </div>
+      </div>
+
+      <!-- Status Form -->
+      <div class="mb-4">
+        <label class="block text-sm font-medium text-gray-700 mb-2">
+          Ubah Status ke:
+        </label>
+        <select
+          id="modalStatusSelect"
+          class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+        >
+          <option value="baru">Baru</option>
+          <option value="proses">Proses</option>
+          <option value="dikirim">Dikirim</option>
+          <option value="selesai">Selesai</option>
+          <option value="batal">Dibatalkan</option>
+        </select>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="flex gap-2">
+        <button
+          id="cancelModalBtn"
+          class="flex-1 px-3 py-2 text-sm bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition font-medium"
+        >
+          Batal
+        </button>
+        <button
+          id="saveStatusBtn"
+          class="flex-1 px-3 py-2 text-sm bg-primary text-white rounded-lg hover:bg-blue-700 transition font-medium"
+        >
+          Simpan
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Elements
+  const elements = {
+    search: document.getElementById("orderSearch"),
+    status: document.getElementById("orderStatus"),
+    payment: document.getElementById("orderPayment"),
+    startDate: document.getElementById("orderStartDate"),
+    endDate: document.getElementById("orderEndDate"),
+    rows: document.querySelectorAll(".order-row"),
+    modal: document.getElementById("editOrderModal"),
+    modalFields: {
+      orderId: document.getElementById("modalOrderId"),
+      customerName: document.getElementById("modalCustomerName"),
+      tableNumber: document.getElementById("modalTableNumber"),
+      total: document.getElementById("modalTotal"),
+      payment: document.getElementById("modalPayment"),
+      currentStatus: document.getElementById("modalCurrentStatus"),
+    },
+    modalStatusSelect: document.getElementById("modalStatusSelect"),
+  };
+
+  // Status config
+  const statusConfig = {
+    baru: { label: "Baru", class: "bg-blue-100 text-primary" },
+    proses: { label: "Proses", class: "bg-yellow-100 text-yellow-800" },
+    dikirim: { label: "Dikirim", class: "bg-indigo-100 text-indigo-700" },
+    selesai: { label: "Selesai", class: "bg-green-100 text-green-800" },
+    batal: { label: "Dibatalkan", class: "bg-red-100 text-red-700" },
+  };
+
+  let currentOrderRow = null;
+
+  // Filter function
+  function filterOrders() {
+    const filters = {
+      term: elements.search.value.toLowerCase(),
+      status: elements.status.value,
+      payment: elements.payment.value,
+      startDate: elements.startDate.value ? new Date(elements.startDate.value) : null,
+      endDate: elements.endDate.value ? new Date(elements.endDate.value) : null,
+    };
+
+    elements.rows.forEach((row) => {
+      const rowDate = new Date(row.getAttribute("data-date"));
+      const matches =
+        row.textContent.toLowerCase().includes(filters.term) &&
+        (!filters.status || row.getAttribute("data-status") === filters.status) &&
+        (!filters.payment || row.getAttribute("data-payment") === filters.payment) &&
+        (!filters.startDate || rowDate >= filters.startDate) &&
+        (!filters.endDate || rowDate <= filters.endDate);
+
+      row.style.display = matches ? "" : "none";
+    });
+  }
+
+  // Modal functions
+  function openModal(row) {
+    currentOrderRow = row;
+    const cells = row.querySelectorAll("td");
+    const status = row.getAttribute("data-status");
+    const config = statusConfig[status];
+
+    elements.modalFields.orderId.textContent = cells[0].textContent.trim();
+    elements.modalFields.customerName.textContent = cells[1].querySelector(".text-sm.font-medium").textContent.trim();
+    elements.modalFields.tableNumber.textContent = cells[2].textContent.trim();
+    elements.modalFields.total.textContent = cells[4].textContent.trim();
+    elements.modalFields.payment.textContent = cells[5].textContent.trim();
+    elements.modalFields.currentStatus.textContent = config.label;
+    elements.modalFields.currentStatus.className = `px-3 py-1 text-xs font-semibold rounded-full ${config.class}`;
+    elements.modalStatusSelect.value = status;
+
+    elements.modal.classList.remove("hidden");
+    elements.modal.classList.add("flex");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeModal() {
+    elements.modal.classList.add("hidden");
+    elements.modal.classList.remove("flex");
+    document.body.style.overflow = "";
+    currentOrderRow = null;
+  }
+
+  function updateOrderStatus() {
+    if (!currentOrderRow) return;
+    const newStatus = elements.modalStatusSelect.value;
+    const config = statusConfig[newStatus];
+    const statusSpan = currentOrderRow.querySelector("td:nth-child(7) span");
+
+    currentOrderRow.setAttribute("data-status", newStatus);
+    statusSpan.textContent = config.label;
+    statusSpan.className = `px-3 py-1 text-xs font-semibold rounded-full flex justify-center items-center ${config.class}`;
+
+    filterOrders();
+    closeModal();
+    console.log(`Status pesanan berhasil diubah menjadi: ${config.label}`);
+  }
+
+  // Initialize
+  const now = new Date();
+  const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+  elements.startDate.value = weekAgo.toISOString().slice(0, 10);
+  elements.endDate.value = now.toISOString().slice(0, 10);
+  filterOrders();
+
+  // Event listeners
+  [elements.search, elements.status, elements.payment, elements.startDate, elements.endDate].forEach(
+    (el) => el.addEventListener("input", filterOrders)
+  );
+
+  document.querySelectorAll(".edit-order-btn").forEach((btn) => {
+    btn.addEventListener("click", () => openModal(btn.closest("tr")));
+  });
+
+  document.getElementById("closeModalBtn").addEventListener("click", closeModal);
+  document.getElementById("cancelModalBtn").addEventListener("click", closeModal);
+  document.getElementById("saveStatusBtn").addEventListener("click", updateOrderStatus);
+
+  elements.modal.addEventListener("click", (e) => e.target === elements.modal && closeModal());
+  document.addEventListener("keydown", (e) => e.key === "Escape" && !elements.modal.classList.contains("hidden") && closeModal());
+</script>
